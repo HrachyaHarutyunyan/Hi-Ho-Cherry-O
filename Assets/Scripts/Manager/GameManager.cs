@@ -19,8 +19,6 @@ public class GameManager : MonoBehaviour {
 	public Board board;
 	public int currentPlayerIndex;
 
-	private bool isFirstUpdate = true;
-
 	// Use this for initialization
 	void Awake () {
 		if (instance == null) {
@@ -40,14 +38,16 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (isFirstUpdate) {
-			isFirstUpdate = false;
-			StartGame ();
-		}
+		
+	}
+
+	private void CherriesCreated() {
+		StartGame ();
 	}
 
 	private void RegisterListeners() {
 		EventManager.StartListening (EventManager.TURN_ENDED, TurnEnded);
+		EventManager.StartListening (EventManager.CHERRIES_CREATED, CherriesCreated);
 	}
 
 	public void InitPlayers(GameMode mode) {
