@@ -11,6 +11,7 @@ public class PreferenceManager : MonoBehaviour {
 		
 
 		void Awake () {
+			DontDestroyOnLoad(transform.gameObject);
 			if (instance == null) {
 				instance = this;
 			} else {
