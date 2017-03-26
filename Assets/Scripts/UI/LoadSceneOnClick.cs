@@ -13,8 +13,10 @@ public class LoadSceneOnClick : MonoBehaviour {
 		ArgumentManager.instance.arguments.Add (ArgumentManager.GAME_MODE, gameMode);
 	}
 
-	public void LoadByIndex(int sceneIndex)
-	{
+	public void LoadByIndex(int sceneIndex){
+		
 		SceneManager.LoadScene (sceneIndex);
 	}
+
+
 }
