@@ -13,8 +13,4 @@ public class Player : PlayerBehaviour {
 	void Update () {
 		
 	}
-
-	public override void StartTurn() {
-
-	}
 }

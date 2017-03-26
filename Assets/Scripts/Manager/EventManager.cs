@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class EventManager : MonoBehaviour {
 
 	public static string TURN_ENDED = "turn_ended";
+	public static string ROULETTE_SPIN_ENDED = "roulette_spin_ended";
 
 	private Dictionary <string, UnityEvent> eventDictionary;
 

@@ -16,7 +16,10 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 
 	public List<PlayerBehaviour> players = new List<PlayerBehaviour>();
+	public Board board;
 	public int currentPlayerIndex;
+
+	private bool isFirstUpdate = true;
 
 	// Use this for initialization
 	void Awake () {
@@ -25,13 +28,22 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Destroy (this);
 		}
-		InitPlayers ((GameMode)ArgumentManager.instance.arguments[ArgumentManager.GAME_MODE]);
-		StartGame ();
+		RegisterListeners ();
+		CreateGameBoard ();
+		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
+		InitPlayers (mode);
 	}
-	
+
+	private void CreateGameBoard() {
+		board = new GameObject ("Board").AddComponent<Board> ();
+	}
+
 	// Update is called once per frame
 	void Update () {
-		
+		if (isFirstUpdate) {
+			isFirstUpdate = false;
+			StartGame ();
+		}
 	}
 
 	private void RegisterListeners() {
@@ -39,8 +51,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void InitPlayers(GameMode mode) {
+		PlayerBehaviour player = new GameObject ("Player").AddComponent<Player> ();
+		player.playerName = "player";
+		players.Add (player);
 		int size = 0;
-		players.Add (new GameObject("Player").AddComponent<Player> ());
 		switch (mode) {
 		case GameMode.TWO_PLAYER:
 			size = 2;
@@ -56,7 +70,9 @@ public class GameManager : MonoBehaviour {
 			break;
 		}
 		for (int i = 1; i < size; i++) {
-			players.Add (new GameObject("PLayerAI").AddComponent<PlayerAI> ());
+			player = new GameObject ("PLayerAI").AddComponent<PlayerAI> ();
+			player.playerName = "ai-" + i;
+			players.Add (player);
 		}
 	}
 
