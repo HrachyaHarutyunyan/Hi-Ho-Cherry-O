@@ -22,6 +22,7 @@ public class Roulette : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		sectionCount = Enum.GetValues (typeof(RouletteAction)).Length;
+		EventManager.TriggerEvent (EventManager.CHERRIES_CREATED);
 	}
 	
 	// Update is called once per frame
