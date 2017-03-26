@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 
 	public enum GameMode
 	{
-		TWO_PLAYER,
+		TWO_PLAYER = 2,
 		THREE_PLAYER,
 		FOUR_PLAYER,
 		MULTIPLAYER
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Destroy (this);
 		}
-		InitPlayers (GameMode.FOUR_PLAYER);
+		InitPlayers ((GameMode)ArgumentManager.instance.arguments[ArgumentManager.GAME_MODE]);
 		StartGame ();
 	}
 	

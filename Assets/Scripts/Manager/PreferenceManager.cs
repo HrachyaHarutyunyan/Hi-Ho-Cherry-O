@@ -4,20 +4,15 @@ using System.Collections.Generic;
 
 
 public class PreferenceManager : MonoBehaviour {
-       
+	
+	public static PreferenceManager instance;
 
-		
-		public static PreferenceManager instance;
-		
-
-		void Awake () {
-			DontDestroyOnLoad(transform.gameObject);
-			if (instance == null) {
-				instance = this;
-			} else {
-				Destroy (this);
-			}
+	void Awake () {
+		if (instance == null) {
+			DontDestroyOnLoad (transform.gameObject);
+			instance = this;
+		} else {
+			Destroy (this);
 		}
-		
+	}
 }
-

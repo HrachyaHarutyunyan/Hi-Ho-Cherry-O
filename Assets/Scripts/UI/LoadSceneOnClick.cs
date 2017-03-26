@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnClick : MonoBehaviour {
 
+	public void InitGameMode(int playerCount) {
+		GameManager.GameMode gameMode = (GameManager.GameMode)playerCount;
+		if(ArgumentManager.instance.arguments.ContainsKey (ArgumentManager.GAME_MODE)) {
+			ArgumentManager.instance.arguments.Remove (ArgumentManager.GAME_MODE);
+		}
+		ArgumentManager.instance.arguments.Add (ArgumentManager.GAME_MODE, gameMode);
+	}
 
 	public void LoadByIndex(int sceneIndex)
 	{
