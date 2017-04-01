@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Board : MonoBehaviour {
+public class Board : Photon.MonoBehaviour {
 	public List<Basket> baskets = new List<Basket>();
 	public List<Tree> trees = new List<Tree>();
 	public Roulette roulette;
