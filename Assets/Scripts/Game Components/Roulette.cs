@@ -16,6 +16,11 @@ public class Roulette : PunBehaviour {
 		SPILLED_BASKET
 	}
 
+	public Arrow arrow;
+	[SerializeField]
+	public List<Sector> sector;
+
+
 	public RouletteAction currentAction;
 
 	private int sectionCount;
@@ -24,15 +29,15 @@ public class Roulette : PunBehaviour {
 	void Start () {
 		sectionCount = Enum.GetValues (typeof(RouletteAction)).Length;
 		EventManager.TriggerEvent (EventManager.CHERRIES_CREATED);
+		SpinRoullette ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	public void SpinRoullette() {
-		currentAction = (RouletteAction)UnityEngine.Random.Range (1, sectionCount + 1);
-		EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
+		arrow.StartSpin ();
 	}
 }

@@ -19,6 +19,7 @@ public abstract class PlayerBehaviour : MonoBehaviour {
 
 	private void RouletteSpiningEnded() {
 		Roulette.RouletteAction currentAction = GameManager.instance.board.roulette.currentAction;
+		Debug.Log ("======currentAction "+currentAction);
 		int fillCount = 0;
 		int emptyCount = 0;
 		switch (currentAction) {
