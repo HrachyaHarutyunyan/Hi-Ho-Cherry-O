@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class GameManager : MonoBehaviour {
 
@@ -27,9 +26,6 @@ public class GameManager : MonoBehaviour {
 			Destroy (this);
 		}
 		RegisterListeners ();
-		CreateGameBoard ();
-		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
-		InitPlayers (mode);
 	}
 
 	private void CreateGameBoard() {
@@ -76,7 +72,14 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void CreateGame() {
+		CreateGameBoard ();
+		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
+		InitPlayers (mode);
+	}
+
 	public void StartGame() {
+
 		int playerIndex = Random.Range (0, players.Count - 1);
 		PlayerBehaviour tmp = players [0];
 		players [0] = players [playerIndex];

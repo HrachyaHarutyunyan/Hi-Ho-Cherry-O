@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Photon;
 
-public class Roulette : MonoBehaviour {
+public class Roulette : PunBehaviour {
 
 	public enum RouletteAction {
 		ONE_CHERRY = 1,

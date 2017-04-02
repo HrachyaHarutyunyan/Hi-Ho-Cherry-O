@@ -25,7 +25,8 @@ public class Board : Photon.MonoBehaviour {
 			basket.transform.parent = transform;
 			baskets.Add (basket);
 		}
-		roulette = new GameObject ("Roulette").AddComponent<Roulette> ();
+		GameObject obj = PhotonNetwork.Instantiate ("Prefabs/Roulette", Vector3.zero, Quaternion.identity, 0);
+		roulette = obj.GetComponent<Roulette> ();
 	}
 	
 	// Update is called once per frame
