@@ -25,6 +25,9 @@ public class Roulette : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (!PhotonNetwork.isMasterClient) {
+			EventManager.TriggerEvent (EventManager.ROULETTE_CREATED);
+		}
 		sectionCount = Enum.GetValues (typeof(RouletteAction)).Length;
 		EventManager.TriggerEvent (EventManager.CHERRIES_CREATED);
 		SpinRoullette ();

@@ -9,6 +9,7 @@ public class EventManager : MonoBehaviour {
 	public static string CHERRIES_CREATED = "cherries_created";
 	public static string ROULETTE_SPIN_ENDED = "roulette_spin_ended";
 	public static string PLAYER_SPINED_ROULETTE = "player_spined_roulette";
+	public static string ROULETTE_CREATED = "roulette_created";
 
 	private Dictionary <string, UnityEvent> eventDictionary;
 

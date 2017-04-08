@@ -49,9 +49,9 @@ public class GameManager : Photon.MonoBehaviour {
 	public void InitPlayers(GameMode mode) {
 		if (PhotonNetwork.isMasterClient) {
 			GameObject playerObj = PhotonNetwork.Instantiate ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0);
-			playerObj.name = "Player";
+			playerObj.name = PhotonNetwork.playerName;
 			PlayerBehaviour player = playerObj.GetComponent<Player> ();
-			player.playerName = "Player";
+			player.playerName = PhotonNetwork.playerName;
 			players.Add (player);
 			int size = 0;
 			switch (mode) {
@@ -76,14 +76,20 @@ public class GameManager : Photon.MonoBehaviour {
 				players.Add (player);
 			}
 		} else {
+			EventManager.StopListening (EventManager.ROULETTE_CREATED, CreateGame);
 			Player[] players = GameObject.FindObjectsOfType<Player> ();
+			Debug.Log ("players count else =========== " + players.Length);
 			foreach (var item in players) {
 				this.players.Add (item);
 			}
 			foreach (var item in players) {
 				if (item.photonView.isSceneView) {
+					item.name = PhotonNetwork.playerName;
+					item.playerName = item.name;
 					item.photonView.TransferOwnership (PhotonNetwork.player);
-					break;
+				} else {
+					item.name = "master";
+					item.playerName = item.name;
 				}
 			}
 		}

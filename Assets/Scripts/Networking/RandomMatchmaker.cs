@@ -30,9 +30,16 @@ public class RandomMatchmaker : PunBehaviour
 		base.OnJoinedRoom ();
 		if (PhotonNetwork.isMasterClient) {
 			PhotonNetwork.playerName = "master";
+			GameManager.instance.CreateGame ();
 		} else {
-			PhotonNetwork.playerName = "client";
+			PhotonNetwork.playerName = "margarita";
+			EventManager.StartListening (EventManager.ROULETTE_CREATED, GameManager.instance.CreateGame);
 		}
-		GameManager.instance.CreateGame ();
+	}
+
+	public override void OnPhotonInstantiate (PhotonMessageInfo info)
+	{
+		base.OnPhotonInstantiate (info);
+		Debug.Log ("OnPhotonInstantiate + " + info.photonView.name);
 	}
 }
