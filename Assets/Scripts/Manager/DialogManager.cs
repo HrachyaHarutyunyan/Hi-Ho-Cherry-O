@@ -23,7 +23,7 @@ public class DialogManager : MonoBehaviour {
 	}
 
 	public void HideGameOver(){
-		gameOverPanel.SetActive (false);
+		gameOverPanel.SetActive (false); 
 	}
 
 
