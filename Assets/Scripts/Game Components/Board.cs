@@ -25,8 +25,13 @@ public class Board : Photon.MonoBehaviour {
 			basket.transform.parent = transform;
 			baskets.Add (basket);
 		}
-		GameObject obj = PhotonNetwork.Instantiate ("Prefabs/Roulette", Vector3.zero, Quaternion.identity, 0);
-		roulette = obj.GetComponent<Roulette> ();
+
+		if (PhotonNetwork.isMasterClient) {
+			GameObject obj = PhotonNetwork.InstantiateSceneObject ("Prefabs/Roulette", Vector3.zero, Quaternion.identity, 0, null);
+			roulette = obj.GetComponent<Roulette> ();
+		} else {
+			roulette = GameObject.FindObjectOfType<Roulette> ();
+		}
 	}
 	
 	// Update is called once per frame

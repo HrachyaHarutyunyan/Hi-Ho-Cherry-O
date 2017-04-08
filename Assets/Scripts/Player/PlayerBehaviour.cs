@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
 using System;
 
-public abstract class PlayerBehaviour : MonoBehaviour {
+public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	public Basket basket;
 	public Tree tree;
 	public string playerName;
+	public bool myTurn;
 
 	public virtual void StartTurn() {
 		Debug.Log (playerName + " started his turn with " + tree.cherries.Count + " cherries on tree");
+		myTurn = true;
 		RegisterListeners ();
-		GameManager.instance.board.roulette.SpinRoullette ();
 	}
 
 	public void EndTurn() {
+		myTurn = false;
 		UnregisterListeners ();
 		EventManager.TriggerEvent (EventManager.TURN_ENDED);
 	}
 
 	private void RouletteSpiningEnded() {
 		Roulette.RouletteAction currentAction = GameManager.instance.board.roulette.currentAction;
-		Debug.Log ("======currentAction "+currentAction);
 		int fillCount = 0;
 		int emptyCount = 0;
 		switch (currentAction) {
@@ -69,11 +70,11 @@ public abstract class PlayerBehaviour : MonoBehaviour {
 		return tree.cherries.Count == 0;
 	}
 
-	private void RegisterListeners() {
+	protected virtual void RegisterListeners() {
 		EventManager.StartListening (EventManager.ROULETTE_SPIN_ENDED, RouletteSpiningEnded);
 	}
 
-	private void UnregisterListeners() {
+	protected virtual void UnregisterListeners() {
 		EventManager.StopListening (EventManager.ROULETTE_SPIN_ENDED, RouletteSpiningEnded);
 	}
 }

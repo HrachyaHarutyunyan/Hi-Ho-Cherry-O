@@ -28,6 +28,11 @@ public class RandomMatchmaker : PunBehaviour
 	public override void OnJoinedRoom ()
 	{
 		base.OnJoinedRoom ();
+		if (PhotonNetwork.isMasterClient) {
+			PhotonNetwork.playerName = "master";
+		} else {
+			PhotonNetwork.playerName = "client";
+		}
 		GameManager.instance.CreateGame ();
 	}
 }

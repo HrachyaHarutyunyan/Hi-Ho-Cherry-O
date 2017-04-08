@@ -7,9 +7,8 @@ public class Arrow : MonoBehaviour {
 	private readonly float MIN_SPEED = 400;
 	private readonly float MAX_SPEED = 600;
 
-
-	private readonly float MIN_STOP_ACCELERATION = 30;
-	private readonly float MAX_STOP_ACCELERATION = 50;
+	private readonly float MIN_STOP_ACCELERATION = 80;
+	private readonly float MAX_STOP_ACCELERATION = 100;
 	private float stopAcceleration;
 
 	public  float speed  = 0;
@@ -26,22 +25,26 @@ public class Arrow : MonoBehaviour {
 		ArrowRotate ();
 	}
 
-	public void StartSpin(){
+	public void StartSpin() {
 		arrowStoped = false;
-		stopAcceleration = Random.Range (MIN_STOP_ACCELERATION,MAX_STOP_ACCELERATION);
-		speed = Random.Range (MIN_SPEED,MAX_SPEED);
+		stopAcceleration = Random.Range (MIN_STOP_ACCELERATION, MAX_STOP_ACCELERATION);
+		speed = Random.Range (MIN_SPEED, MAX_SPEED);
 	}
 
-	private void ArrowRotate(){
-		if (speed > 0) {
-			transform.Rotate (Vector3.back, speed * Time.deltaTime);
-			speed -= stopAcceleration * Time.deltaTime;
-		} else {
-			arrowStoped = true;
-			GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
-			EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
+	private void ArrowRotate() {
+		if (!arrowStoped) {
+			if (speed > 0) {
+				transform.Rotate (Vector3.back, speed * Time.deltaTime);
+				speed -= stopAcceleration * Time.deltaTime;
+			} else {
+				ArrowStop ();
+			}
 		}
 	}
 
-
+	private void ArrowStop() {
+		arrowStoped = true;
+		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
+		EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
+	}
 }

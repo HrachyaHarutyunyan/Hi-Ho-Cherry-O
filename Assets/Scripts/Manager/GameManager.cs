@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : Photon.MonoBehaviour {
 
 	public enum GameMode
 	{
@@ -47,34 +47,51 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void InitPlayers(GameMode mode) {
-		PlayerBehaviour player = new GameObject ("Player").AddComponent<Player> ();
-		player.playerName = "player";
-		players.Add (player);
-		int size = 0;
-		switch (mode) {
-		case GameMode.TWO_PLAYER:
-			size = 2;
-			break;
-		case GameMode.THREE_PLAYER:
-			size = 3;
-			break;
-		case GameMode.FOUR_PLAYER:
-			size = 4;
-			break;
-		case GameMode.MULTIPLAYER:
-			size = 1;
-			break;
-		}
-		for (int i = 1; i < size; i++) {
-			player = new GameObject ("PLayerAI").AddComponent<PlayerAI> ();
-			player.playerName = "ai-" + i;
+		if (PhotonNetwork.isMasterClient) {
+			GameObject playerObj = PhotonNetwork.Instantiate ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0);
+			playerObj.name = "Player";
+			PlayerBehaviour player = playerObj.GetComponent<Player> ();
+			player.playerName = "Player";
 			players.Add (player);
+			int size = 0;
+			switch (mode) {
+			case GameMode.TWO_PLAYER:
+				size = 2;
+				break;
+			case GameMode.THREE_PLAYER:
+				size = 3;
+				break;
+			case GameMode.FOUR_PLAYER:
+				size = 4;
+				break;
+			case GameMode.MULTIPLAYER:
+				size = 1;
+				break;
+			}
+			for (int i = 1; i < size; i++) {
+				playerObj = PhotonNetwork.InstantiateSceneObject ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0, null);
+				player = playerObj.GetComponent<Player> ();
+				player.playerName = "EmptyPlayer" + i;
+				player.name = "EmptyPlayer";
+				players.Add (player);
+			}
+		} else {
+			Player[] players = GameObject.FindObjectsOfType<Player> ();
+			foreach (var item in players) {
+				this.players.Add (item);
+			}
+			foreach (var item in players) {
+				if (item.photonView.isSceneView) {
+					
+					break;
+				}
+			}
 		}
 	}
 
 	public void CreateGame() {
 		CreateGameBoard ();
-		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
+		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.TWO_PLAYER;
 		InitPlayers (mode);
 	}
 
@@ -86,10 +103,16 @@ public class GameManager : MonoBehaviour {
 		players [playerIndex] = tmp;
 
 		currentPlayerIndex = 0;
+		Debug.Log ("players = " + players [currentPlayerIndex].playerName);
 		players [currentPlayerIndex].StartTurn ();
 	}
 
 	public void TurnEnded() {
+		photonView.RPC ("TurnEnded", PhotonTargets.MasterClient, null);
+	}
+
+	[PunRPC]
+	private void TurnEndedRPC() {
 		currentPlayerIndex++;
 		if (currentPlayerIndex == players.Count) {
 			currentPlayerIndex = 0;
