@@ -32,8 +32,8 @@ public class Player : PlayerBehaviour {
 
 	[PunRPC]
 	public void StartTurnRPC() {
+		Debug.Log (playerName + " started his turn with " + tree.cherries.Count + " cherries on tree");
 		if (photonView.isMine) {
-			Debug.Log (playerName + " started his turn with " + tree.cherries.Count + " cherries on tree");
 			myTurn = true;
 			RegisterListeners ();
 		}
