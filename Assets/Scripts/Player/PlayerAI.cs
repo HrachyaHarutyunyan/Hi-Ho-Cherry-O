@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerAI : PlayerBehaviour {
 
+	public override void StartTurn ()
+	{
+		base.StartTurn ();
+		GameManager.instance.board.roulette.SpinRoullette ();
+	}
+
 	// Use this for initialization
 	void Start () {
 		

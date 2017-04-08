@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Photon;
 
-public class Roulette : PunBehaviour {
+public class Roulette : Photon.MonoBehaviour {
 
 	public enum RouletteAction {
 		ONE_CHERRY = 1,
@@ -19,8 +19,6 @@ public class Roulette : PunBehaviour {
 	public Arrow arrow;
 	[SerializeField]
 	public List<Sector> sector;
-
-
 	public RouletteAction currentAction;
 
 	private int sectionCount;
@@ -37,6 +35,7 @@ public class Roulette : PunBehaviour {
 
 	}
 
+	[PunRPC]
 	public void SpinRoullette() {
 		arrow.StartSpin ();
 	}
