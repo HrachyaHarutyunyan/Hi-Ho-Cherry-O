@@ -15,6 +15,7 @@ public class Arrow : Photon.MonoBehaviour {
 	public  Collider2D currentSector;
 	public bool arrowStoped = true;
 
+
 	void Awake(){
 		arrowStoped = true;
 	}
@@ -57,7 +58,8 @@ public class Arrow : Photon.MonoBehaviour {
 		if (stream.isWriting) {
 			stream.SendNext (transform.rotation);
 		} else {
-			transform.rotation = (Quaternion)stream.ReceiveNext ();
+			transform.rotation =  Quaternion.Lerp(transform.rotation,(Quaternion)stream.ReceiveNext (),Time.deltaTime*speed);
+			Debug.Log ("=====transform.rotation "+transform.rotation.z);
 		}
 	}
 }
