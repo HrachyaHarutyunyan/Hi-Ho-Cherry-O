@@ -40,7 +40,6 @@ public class RandomMatchmaker : PunBehaviour
 	public override void OnPhotonInstantiate (PhotonMessageInfo info)
 	{
 		base.OnPhotonInstantiate (info);
-		Debug.Log ("OnPhotonInstantiate + " + info.photonView.name);
 	}
 
 	public override void OnPhotonPlayerConnected (PhotonPlayer newPlayer)
