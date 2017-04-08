@@ -36,7 +36,6 @@ public class Roulette : Photon.MonoBehaviour {
 
 	}
 
-	[PunRPC]
 	public void SpinRoullette() {
 		arrow.StartSpin ();
 	}

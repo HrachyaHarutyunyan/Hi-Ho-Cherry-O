@@ -13,8 +13,15 @@ public class Player : PlayerBehaviour {
 	void Update () {
 		if (photonView.isMine && myTurn) {
 			if (Input.GetMouseButtonDown (0)) {
-				EventManager.TriggerEvent (EventManager.PLAYER_SPINED_ROULETTE);
+				photonView.RPC ("SpinRoulette", PhotonTargets.MasterClient, null);
 			}
+		}
+	}
+
+	[PunRPC]
+	public void SpinRoulette() {
+		if (PhotonNetwork.isMasterClient) {
+			GameManager.instance.board.roulette.SpinRoullette ();
 		}
 	}
 
