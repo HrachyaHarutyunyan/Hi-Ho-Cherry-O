@@ -108,7 +108,7 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void TurnEnded() {
-		photonView.RPC ("TurnEnded", PhotonTargets.MasterClient, null);
+		photonView.RPC ("TurnEndedRPC", PhotonTargets.MasterClient, null);
 	}
 
 	[PunRPC]
