@@ -59,7 +59,6 @@ public class Arrow : Photon.MonoBehaviour {
 			stream.SendNext (transform.rotation);
 		} else {
 			transform.rotation =  Quaternion.Lerp(transform.rotation,(Quaternion)stream.ReceiveNext (),Time.deltaTime*speed);
-			Debug.Log ("=====transform.rotation "+transform.rotation.z);
 		}
 	}
 }
