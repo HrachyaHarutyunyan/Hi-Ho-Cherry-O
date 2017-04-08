@@ -42,4 +42,12 @@ public class RandomMatchmaker : PunBehaviour
 		base.OnPhotonInstantiate (info);
 		Debug.Log ("OnPhotonInstantiate + " + info.photonView.name);
 	}
+
+	public override void OnPhotonPlayerConnected (PhotonPlayer newPlayer)
+	{
+		base.OnPhotonPlayerConnected (newPlayer);
+		if (PhotonNetwork.playerList.Length == 2) {
+			EventManager.TriggerEvent (EventManager.CHERRIES_CREATED);
+		}
+	}
 }

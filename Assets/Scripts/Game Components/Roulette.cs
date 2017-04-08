@@ -29,8 +29,6 @@ public class Roulette : Photon.MonoBehaviour {
 			EventManager.TriggerEvent (EventManager.ROULETTE_CREATED);
 		}
 		sectionCount = Enum.GetValues (typeof(RouletteAction)).Length;
-		EventManager.TriggerEvent (EventManager.CHERRIES_CREATED);
-		SpinRoullette ();
 	}
 	
 	// Update is called once per frame
