@@ -62,7 +62,7 @@ public class Player : PlayerBehaviour {
 			Debug.Log (playerName + " action is " + currentAction + " tree = " + tree.cherries.Count + " basket = " + basket.cherries.Count);
 			if (CheckForWinner ()) {
 				Debug.Log (playerName + " hi ho cherry o!!");
-
+				DialogManager.instance.ShowGameOver ();
 			} else {
 				EndTurn ();
 			}
