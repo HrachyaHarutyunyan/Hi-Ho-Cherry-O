@@ -41,11 +41,12 @@ public class Arrow : Photon.MonoBehaviour {
 				transform.Rotate (Vector3.back, speed * Time.deltaTime);
 				speed -= stopAcceleration * Time.deltaTime;
 			} else {
-				ArrowStop ();
+				photonView.RPC ("ArrowStop", PhotonTargets.All, null);
 			}
 		}
 	}
 
+	[PunRPC]
 	private void ArrowStop() {
 		arrowStoped = true;
 		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
