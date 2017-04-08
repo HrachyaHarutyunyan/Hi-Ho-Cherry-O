@@ -82,7 +82,7 @@ public class GameManager : Photon.MonoBehaviour {
 			}
 			foreach (var item in players) {
 				if (item.photonView.isSceneView) {
-					
+					item.photonView.TransferOwnership (PhotonNetwork.player);
 					break;
 				}
 			}
