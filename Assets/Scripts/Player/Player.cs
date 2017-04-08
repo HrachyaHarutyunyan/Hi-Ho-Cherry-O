@@ -29,4 +29,13 @@ public class Player : PlayerBehaviour {
 		base.UnregisterListeners ();
 		EventManager.StopListening (EventManager.PLAYER_SPINED_ROULETTE, GameManager.instance.board.roulette.SpinRoullette);
 	}
+
+	[PunRPC]
+	public void StartTurnRPC() {
+		Debug.Log (playerName + " started his turn with " + tree.cherries.Count + " cherries on tree");
+		if (photonView.isMine) {
+			myTurn = true;
+			RegisterListeners ();
+		}
+	}
 }

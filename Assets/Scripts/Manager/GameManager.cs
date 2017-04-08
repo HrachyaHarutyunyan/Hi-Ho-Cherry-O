@@ -96,7 +96,6 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void StartGame() {
-
 		int playerIndex = Random.Range (0, players.Count - 1);
 		PlayerBehaviour tmp = players [0];
 		players [0] = players [playerIndex];

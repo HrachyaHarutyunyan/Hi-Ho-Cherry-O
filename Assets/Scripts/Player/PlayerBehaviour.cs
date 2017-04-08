@@ -8,9 +8,7 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	public bool myTurn;
 
 	public virtual void StartTurn() {
-		Debug.Log (playerName + " started his turn with " + tree.cherries.Count + " cherries on tree");
-		myTurn = true;
-		RegisterListeners ();
+		photonView.RPC ("StartTurnRPC", PhotonTargets.AllViaServer, null);
 	}
 
 	public void EndTurn() {
