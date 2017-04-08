@@ -13,7 +13,11 @@ public class Arrow : MonoBehaviour {
 
 	public  float speed  = 0;
 	public  Collider2D currentSector;
-	public bool arrowStoped;
+	public bool arrowStoped = true;
+
+	void Awake(){
+		arrowStoped = true;
+	}
 
 	// Use this for initialization
 	void Start () {
