@@ -15,9 +15,17 @@ public class Arrow : Photon.MonoBehaviour {
 	public  Collider2D currentSector;
 	public bool arrowStoped = true;
 
+	float timer = 0.1f;
+	float TIME = 0.1f;
+
+	GameObject preCalcArrow;
 
 	void Awake(){
 		arrowStoped = true;
+		if(PhotonNetwork.isMasterClient) {
+			preCalcArrow = new GameObject ();
+			preCalcArrow.transform.parent = transform.parent;
+		}
 	}
 
 	// Use this for initialization
@@ -39,7 +47,12 @@ public class Arrow : Photon.MonoBehaviour {
 	private void ArrowRotate() {
 		if (!arrowStoped) {
 			if (speed > 0) {
-				transform.Rotate (Vector3.back, speed * Time.deltaTime);
+				preCalcArrow.transform.Rotate (Vector3.back, speed * Time.deltaTime);
+				timer += Time.deltaTime;
+				if (timer > TIME) {
+					photonView.RPC ("RotateRPC", PhotonTargets.AllViaServer, preCalcArrow.transform.eulerAngles);
+					timer = 0;
+				}
 				speed -= stopAcceleration * Time.deltaTime;
 			} else {
 				photonView.RPC ("ArrowStop", PhotonTargets.All, null);
@@ -54,11 +67,16 @@ public class Arrow : Photon.MonoBehaviour {
 		EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
 	}
 
-	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
-		if (stream.isWriting) {
-			stream.SendNext (transform.rotation);
-		} else {
-			transform.rotation =  Quaternion.Lerp(transform.rotation,(Quaternion)stream.ReceiveNext (),Time.deltaTime*speed);
-		}
+//	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+//		if (stream.isWriting) {
+//			stream.SendNext (transform.rotation);
+//		} else {
+//			transform.rotation =  Quaternion.Lerp(transform.rotation,(Quaternion)stream.ReceiveNext (),Time.deltaTime*speed);
+//		}
+//	}
+
+	[PunRPC]
+	private void RotateRPC(Vector3 eulerAngles) {
+		transform.eulerAngles = Vector3.Lerp (transform.eulerAngles, eulerAngles, Time.deltaTime * 150);
 	}
 }
