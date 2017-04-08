@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour {
+public class Arrow : Photon.MonoBehaviour {
 
 	private readonly float MIN_SPEED = 400;
 	private readonly float MAX_SPEED = 600;
@@ -50,5 +50,13 @@ public class Arrow : MonoBehaviour {
 		arrowStoped = true;
 		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
 		EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
+	}
+
+	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+		if (stream.isWriting) {
+			stream.SendNext (transform.rotation);
+		} else {
+			transform.rotation = (Quaternion)stream.ReceiveNext ();
+		}
 	}
 }
