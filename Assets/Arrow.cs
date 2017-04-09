@@ -26,7 +26,7 @@ public class Arrow : Photon.MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () { 
+	void Update () { 
 		ArrowRotate ();
 	}
 
@@ -51,20 +51,24 @@ public class Arrow : Photon.MonoBehaviour {
 	private void ArrowRotate() {
 		if (!arrowStoped) {
 			if (speed > 0) {
-				transform.Rotate (Vector3.back, speed * Time.fixedDeltaTime);
-				speed -= stopAcceleration * Time.fixedDeltaTime;
+				transform.Rotate (Vector3.back, speed * Time.deltaTime);
+				speed -= stopAcceleration * Time.deltaTime;
 			} else {
-				photonView.RPC ("ArrowStop", PhotonTargets.All, null);
+				Debug.Log ("stop arrow !!!!!!!!!!!!");
+				photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation);
 			}
 		}
 	}
 
 	[PunRPC]
-	private void ArrowStop() {
+	private void ArrowStop(Quaternion rotation) {
 		startSpin = false;
 		arrowStoped = true;
 		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
 		EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
+		if (!PhotonNetwork.isMasterClient) {
+			transform.rotation = rotation;
+		}
 	}
 
 //	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
