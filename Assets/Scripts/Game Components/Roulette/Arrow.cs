@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour {
+public class Arrow : Photon.MonoBehaviour {
 
 	public  Collider2D currentSector;
 	public bool arrowStoped = true;
@@ -15,14 +15,18 @@ public class Arrow : MonoBehaviour {
 	public bool startSpin;
 
 	public void StartSpin() {
-		if(!startSpin){
+		if (!startSpin) {
+			startSpin = true;
 			eulerAngle = Random.Range (MIN_EULERANGLE, MAX_EULERANGLE);
-			oneRotateTime =  Random.Range (0.8f, 1.4f);
-			rotateTime = eulerAngle * oneRotateTime;
-			iTween.RotateBy (gameObject,iTween.Hash("z",-eulerAngle,"time",rotateTime,"oncomplete","SpinComplete"));
+			oneRotateTime = Random.Range (0.8f, 1.4f);
+			photonView.RPC ("SpinRPC", PhotonTargets.AllViaServer, new object[] { eulerAngle, oneRotateTime });
 		}
+	}
 
-
+	[PunRPC]
+	private void SpinRPC(float eulerAngle, float oneRotateTime) {
+		rotateTime = eulerAngle * oneRotateTime;
+		iTween.RotateBy (gameObject,iTween.Hash("z",-eulerAngle,"time",rotateTime,"oncomplete","SpinComplete"));
 	}
 
 	public void SpinComplete(){
