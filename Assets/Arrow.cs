@@ -59,9 +59,11 @@ public class Arrow : Photon.MonoBehaviour {
 			} else {
 				if (PhotonNetwork.isMasterClient) {
 					Debug.Log ("stop arrow !!!!!!!!!!!!");
-					photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation);
+					photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation.eulerAngles);
 				} else if(finalRotation != Vector3.zero) {
-					transform.rotation.eulerAngles = finalRotation;
+					Quaternion rot = transform.rotation;
+					rot.eulerAngles = finalRotation;
+					transform.rotation = rot;
 				}
 				startSpin = false;
 				arrowStoped = true;
@@ -75,7 +77,9 @@ public class Arrow : Photon.MonoBehaviour {
 	private void ArrowStop(Vector3 rotation) {
 		finalRotation = rotation;
 		if (arrowStoped) {
-			transform.rotation.eulerAngles = finalRotation;
+			Quaternion rot = transform.rotation;
+			rot.eulerAngles = finalRotation;
+			transform.rotation = rot;
 		}
 	}
 
