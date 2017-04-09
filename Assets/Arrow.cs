@@ -14,6 +14,7 @@ public class Arrow : Photon.MonoBehaviour {
 	public  float speed  = 0;
 	public  Collider2D currentSector;
 	public bool arrowStoped = true;
+	public bool startSpin;
 
 	void Awake(){
 		arrowStoped = true;
@@ -30,9 +31,12 @@ public class Arrow : Photon.MonoBehaviour {
 	}
 
 	public void StartSpin() {
-		stopAcceleration = Random.Range (MIN_STOP_ACCELERATION, MAX_STOP_ACCELERATION);
-		speed = Random.Range (MIN_SPEED, MAX_SPEED);
-		photonView.RPC ("SpinRPC", PhotonTargets.AllViaServer, new object[]{stopAcceleration, speed});
+		if (!startSpin) {
+			startSpin = true;
+			stopAcceleration = Random.Range (MIN_STOP_ACCELERATION, MAX_STOP_ACCELERATION);
+			speed = Random.Range (MIN_SPEED, MAX_SPEED);
+			photonView.RPC ("SpinRPC", PhotonTargets.AllViaServer, new object[]{ stopAcceleration, speed });
+		}
 	}
 
 	[PunRPC]
@@ -57,6 +61,7 @@ public class Arrow : Photon.MonoBehaviour {
 
 	[PunRPC]
 	private void ArrowStop() {
+		startSpin = false;
 		arrowStoped = true;
 		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
 		EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
