@@ -38,6 +38,8 @@ public class Arrow : Photon.MonoBehaviour {
 	[PunRPC]
 	public void SpinRPC(float stopAcceleration, float speed) {
 		arrowStoped = false;
+		Debug.Log ("speed = " + speed);
+		Debug.Log ("stopAcceleration = " + stopAcceleration);
 		this.stopAcceleration = stopAcceleration;
 		this.speed = speed;
 	}
