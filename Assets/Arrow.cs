@@ -34,7 +34,7 @@ public class Arrow : Photon.MonoBehaviour {
 
 	public void StartSpin() {
 		if (!startSpin) {
-			finalRotation = -1;
+			finalRotation = Quaternion.identity;
 			startSpin = true;
 			stopAcceleration = Random.Range (MIN_STOP_ACCELERATION, MAX_STOP_ACCELERATION);
 			speed = Random.Range (MIN_SPEED, MAX_SPEED);
@@ -60,7 +60,7 @@ public class Arrow : Photon.MonoBehaviour {
 				if (PhotonNetwork.isMasterClient) {
 					Debug.Log ("stop arrow !!!!!!!!!!!!");
 					photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation);
-				} else if(finalRotation != -1) {
+				} else if(finalRotation != Quaternion.identity) {
 					transform.rotation = finalRotation;
 				}
 				startSpin = false;
