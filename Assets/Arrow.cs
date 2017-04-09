@@ -16,6 +16,8 @@ public class Arrow : Photon.MonoBehaviour {
 	public bool arrowStoped = true;
 	public bool startSpin;
 
+	private Quaternion finalRotation;
+
 	void Awake(){
 		arrowStoped = true;
 	}
@@ -57,19 +59,21 @@ public class Arrow : Photon.MonoBehaviour {
 				if (PhotonNetwork.isMasterClient) {
 					Debug.Log ("stop arrow !!!!!!!!!!!!");
 					photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation);
+				} else {
+					transform.rotation = finalRotation;
 				}
+				startSpin = false;
+				arrowStoped = true;
 			}
 		}
 	}
 
 	[PunRPC]
 	private void ArrowStop(Quaternion rotation) {
-		startSpin = false;
-		arrowStoped = true;
 		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
 		EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
 		if (!PhotonNetwork.isMasterClient) {
-			transform.rotation = rotation;
+			finalRotation = rotation;
 		}
 	}
 
