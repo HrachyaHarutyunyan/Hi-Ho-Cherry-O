@@ -35,6 +35,7 @@ public class Arrow : Photon.MonoBehaviour {
 		photonView.RPC ("SpinRPC", PhotonTargets.AllViaServer, new object[]{stopAcceleration, speed});
 	}
 
+	[PunRPC]
 	public void SpinRPC(float stopAcceleration, float speed) {
 		arrowStoped = false;
 		this.stopAcceleration = stopAcceleration;
