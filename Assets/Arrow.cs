@@ -43,7 +43,7 @@ public class Arrow : Photon.MonoBehaviour {
 		this.stopAcceleration = stopAcceleration;
 		this.speed = speed;
 	}
-
+	 
 	private void ArrowRotate() {
 		if (!arrowStoped) {
 			if (speed > 0) {
