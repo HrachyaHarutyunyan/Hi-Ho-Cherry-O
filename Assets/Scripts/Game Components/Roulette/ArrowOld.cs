@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : Photon.MonoBehaviour {
+public class ArrowOld : Photon.MonoBehaviour {
 
 	private readonly float MIN_SPEED = 400;
 	private readonly float MAX_SPEED = 600;
