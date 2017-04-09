@@ -16,7 +16,7 @@ public class Arrow : Photon.MonoBehaviour {
 	public bool arrowStoped = true;
 	public bool startSpin;
 
-	private Quaternion finalRotation;
+	private Vector3 finalRotation;
 
 	void Awake(){
 		arrowStoped = true;
@@ -34,7 +34,7 @@ public class Arrow : Photon.MonoBehaviour {
 
 	public void StartSpin() {
 		if (!startSpin) {
-			finalRotation = Quaternion.identity;
+			finalRotation = Vector3.zero;
 			startSpin = true;
 			stopAcceleration = Random.Range (MIN_STOP_ACCELERATION, MAX_STOP_ACCELERATION);
 			speed = Random.Range (MIN_SPEED, MAX_SPEED);
@@ -60,8 +60,8 @@ public class Arrow : Photon.MonoBehaviour {
 				if (PhotonNetwork.isMasterClient) {
 					Debug.Log ("stop arrow !!!!!!!!!!!!");
 					photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation);
-				} else if(finalRotation != Quaternion.identity) {
-					transform.rotation = finalRotation;
+				} else if(finalRotation != Vector3.zero) {
+					transform.rotation.eulerAngles = finalRotation;
 				}
 				startSpin = false;
 				arrowStoped = true;
@@ -72,10 +72,10 @@ public class Arrow : Photon.MonoBehaviour {
 	}
 
 	[PunRPC]
-	private void ArrowStop(Quaternion rotation) {
+	private void ArrowStop(Vector3 rotation) {
 		finalRotation = rotation;
 		if (arrowStoped) {
-			transform.rotation = finalRotation;
+			transform.rotation.eulerAngles = finalRotation;
 		}
 	}
 
