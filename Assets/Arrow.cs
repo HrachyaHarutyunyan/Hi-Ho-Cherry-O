@@ -26,7 +26,7 @@ public class Arrow : Photon.MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () { 
+	void FixedUpdate () { 
 		ArrowRotate ();
 	}
 
@@ -51,8 +51,8 @@ public class Arrow : Photon.MonoBehaviour {
 	private void ArrowRotate() {
 		if (!arrowStoped) {
 			if (speed > 0) {
-				transform.Rotate (Vector3.back, speed * Time.deltaTime);
-				speed -= stopAcceleration * Time.deltaTime;
+				transform.Rotate (Vector3.back, speed * Time.fixedDeltaTime);
+				speed -= stopAcceleration * Time.fixedDeltaTime;
 			} else {
 				photonView.RPC ("ArrowStop", PhotonTargets.All, null);
 			}
