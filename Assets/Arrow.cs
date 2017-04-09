@@ -34,6 +34,7 @@ public class Arrow : Photon.MonoBehaviour {
 
 	public void StartSpin() {
 		if (!startSpin) {
+			finalRotation = -1;
 			startSpin = true;
 			stopAcceleration = Random.Range (MIN_STOP_ACCELERATION, MAX_STOP_ACCELERATION);
 			speed = Random.Range (MIN_SPEED, MAX_SPEED);
@@ -59,21 +60,22 @@ public class Arrow : Photon.MonoBehaviour {
 				if (PhotonNetwork.isMasterClient) {
 					Debug.Log ("stop arrow !!!!!!!!!!!!");
 					photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation);
-				} else {
+				} else if(finalRotation != -1) {
 					transform.rotation = finalRotation;
 				}
 				startSpin = false;
 				arrowStoped = true;
+				GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
+				EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
 			}
 		}
 	}
 
 	[PunRPC]
 	private void ArrowStop(Quaternion rotation) {
-		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
-		EventManager.TriggerEvent (EventManager.ROULETTE_SPIN_ENDED);
-		if (!PhotonNetwork.isMasterClient) {
-			finalRotation = rotation;
+		finalRotation = rotation;
+		if (arrowStoped) {
+			transform.rotation = finalRotation;
 		}
 	}
 
