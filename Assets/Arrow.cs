@@ -54,8 +54,10 @@ public class Arrow : Photon.MonoBehaviour {
 				transform.Rotate (Vector3.back, speed * Time.deltaTime);
 				speed -= stopAcceleration * Time.deltaTime;
 			} else {
-				Debug.Log ("stop arrow !!!!!!!!!!!!");
-				photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation);
+				if (PhotonNetwork.isMasterClient) {
+					Debug.Log ("stop arrow !!!!!!!!!!!!");
+					photonView.RPC ("ArrowStop", PhotonTargets.AllViaServer, transform.rotation);
+				}
 			}
 		}
 	}
