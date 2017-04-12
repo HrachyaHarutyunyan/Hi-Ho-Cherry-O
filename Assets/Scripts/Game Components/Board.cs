@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 public class Board : Photon.MonoBehaviour {
 	public List<Basket> baskets = new List<Basket>();
@@ -19,7 +20,10 @@ public class Board : Photon.MonoBehaviour {
 			item.tree = tree;
 			tree.transform.parent = transform;
 			trees.Add (tree);
-
+			tree.index = trees.Count - 1;
+			SpriteRenderer spriteRenderer = tree.gameObject.AddComponent<SpriteRenderer> ();
+			spriteRenderer.sprite =  Resources.Load<Sprite>("Textures/tree"+tree.index);
+			spriteRenderer.sortingOrder = 1;
 			Basket basket = new GameObject ("Basket").AddComponent<Basket> ();
 			item.basket = basket;
 			basket.transform.parent = transform;

@@ -30,6 +30,7 @@ public class GameManager : Photon.MonoBehaviour {
 
 	private void CreateGameBoard() {
 		board = new GameObject ("Board").AddComponent<Board> ();
+		board.gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/background");
 	}
 
 	// Update is called once per frame
