@@ -12,9 +12,11 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	}
 
 	public void EndTurn() {
-		myTurn = false;
-		UnregisterListeners ();
-		EventManager.TriggerEvent (EventManager.TURN_ENDED);
+		if (photonView.isMine) {
+			myTurn = false;
+			UnregisterListeners ();
+			EventManager.TriggerEvent (EventManager.TURN_ENDED);
+		}
 	}
 
 	protected bool CheckForWinner() {
