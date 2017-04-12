@@ -15,4 +15,13 @@ public class Cherry : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	public void MoveToBasket(Basket basket){
+		Vector3 basketPosition = basket.transform.position;
+		iTween.MoveTo (gameObject,iTween.Hash("x",basketPosition.x,"y",basketPosition.y,"z",basketPosition.z,"oncomplete","CherryInBasket"));
+	}
+
+	public void CherryInBasket(){
+		Debug.Log ("+======CherryInBasket");
+	}
 }

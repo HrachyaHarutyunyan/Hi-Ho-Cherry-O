@@ -11,6 +11,15 @@ public class Tree : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	public void Init(){
 		for (int i = 0; i < CHERRY_COUNT; i++) {
 			Cherry cherry = new GameObject ("Cherry").AddComponent<Cherry> ();
 			cherry.transform.parent = transform;
@@ -18,12 +27,8 @@ public class Tree : MonoBehaviour {
 			cherry.index = cherries.Count - 1;
 			SpriteRenderer spriteRenderer = cherry.gameObject.AddComponent<SpriteRenderer> ();
 			spriteRenderer.sprite =  Resources.Load<Sprite>("Textures/cherry");
-			spriteRenderer.sortingOrder = 1;
+			spriteRenderer.sortingOrder = 3;
+			cherry.gameObject.transform.localPosition = ConstantsManager.instance.cherrysCordination["tree"+index][i];
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }
