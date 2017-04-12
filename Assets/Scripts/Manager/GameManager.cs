@@ -29,6 +29,7 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	private void CreateGameBoard() {
+		Debug.Log ("createe7h");
 		board = new GameObject ("Board").AddComponent<Board> ();
 		board.gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/background");
 	}
@@ -79,7 +80,6 @@ public class GameManager : Photon.MonoBehaviour {
 		} else {
 			EventManager.StopListening (EventManager.ROULETTE_CREATED, CreateGame);
 			Player[] players = GameObject.FindObjectsOfType<Player> ();
-			Debug.Log ("players count else =========== " + players.Length);
 			foreach (var item in players) {
 				this.players.Add (item);
 			}

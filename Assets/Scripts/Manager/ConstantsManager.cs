@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using  System.Collections.ObjectModel;
-using UnityEditor;
+using System.Collections.ObjectModel;
 
 public class ConstantsManager : MonoBehaviour {
 
@@ -48,8 +47,4 @@ public class ConstantsManager : MonoBehaviour {
 		treesScales.Add ("tree3",new Vector2(0.25f,0.25f));
 
 	}
-
-
-
-	
 }

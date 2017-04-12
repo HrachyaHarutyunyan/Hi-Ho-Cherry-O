@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEditor;
 
-public class Board : Photon.MonoBehaviour {
+public class Board : MonoBehaviour {
 	public List<Basket> baskets = new List<Basket>();
 	public List<Tree> trees = new List<Tree>();
 	public Roulette roulette;
@@ -14,7 +13,8 @@ public class Board : Photon.MonoBehaviour {
 		InitBoard ();
 	}
 
-	private void InitBoard() {
+	private void InitBoard () {
+		Debug.Log ("init board ");
 		foreach (var item in GameManager.instance.players) {
 			Tree tree = new GameObject ("Tree").AddComponent<Tree> ();
 			item.tree = tree;
