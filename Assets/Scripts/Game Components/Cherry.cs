@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Cherry : MonoBehaviour {
 
+	public int index;
+
 	// Use this for initialization
 	void Start () {
 		

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour {
 
+	public int index;
 	public static int CHERRY_COUNT = 10;
 
 	public List<Cherry> cherries = new List<Cherry>();
@@ -14,6 +15,10 @@ public class Tree : MonoBehaviour {
 			Cherry cherry = new GameObject ("Cherry").AddComponent<Cherry> ();
 			cherry.transform.parent = transform;
 			cherries.Add (cherry);
+			cherry.index = cherries.Count - 1;
+			SpriteRenderer spriteRenderer = cherry.gameObject.AddComponent<SpriteRenderer> ();
+			spriteRenderer.sprite =  Resources.Load<Sprite>("Textures/cherry");
+			spriteRenderer.sortingOrder = 1;
 		}
 	}
 	
