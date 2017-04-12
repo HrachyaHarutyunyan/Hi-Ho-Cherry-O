@@ -16,7 +16,7 @@ public class RandomMatchmaker : PunBehaviour
 
 	public override void OnJoinedLobby()
 	{
-		PhotonNetwork.JoinOrCreateRoom ("24", new RoomOptions(), TypedLobby.Default);
+		PhotonNetwork.JoinOrCreateRoom ("23", new RoomOptions(), TypedLobby.Default);
 	}
 
 	void OnPhotonRandomJoinFailed()

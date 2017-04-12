@@ -68,6 +68,11 @@ public class Player : PlayerBehaviour {
 	}
 
 	[PunRPC]
+	private void ChangePLayerName(string name) {
+		this.name = name;
+	}
+
+	[PunRPC]
 	public void SpinRoulette() {
 		if (PhotonNetwork.isMasterClient) {
 			GameManager.instance.board.roulette.SpinRoullette ();

@@ -32,6 +32,6 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	}
 
 	private void RouletteSpiningEnded() {
-		photonView.RPC ("RouletteSpinResult", PhotonTargets.All, null);
+		photonView.RPC ("RouletteSpinResult", PhotonTargets.AllViaServer, null);
 	}
 }
