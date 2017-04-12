@@ -24,11 +24,11 @@ public class Tree : MonoBehaviour {
 			Cherry cherry = new GameObject ("Cherry").AddComponent<Cherry> ();
 			cherry.transform.parent = transform;
 			cherries.Add (cherry);
-			cherry.index = cherries.Count - 1;
+			cherry.index = i;
 			SpriteRenderer spriteRenderer = cherry.gameObject.AddComponent<SpriteRenderer> ();
 			spriteRenderer.sprite =  Resources.Load<Sprite>("Textures/cherry");
 			spriteRenderer.sortingOrder = 3;
-			cherry.gameObject.transform.localPosition = ConstantsManager.instance.cherrysCordination["tree"+index][i];
+			cherry.gameObject.transform.position = ConstantsManager.instance.cherrysCordination["tree"+index][cherry.index];
 		}
 	}
 }

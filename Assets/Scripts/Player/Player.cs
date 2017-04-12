@@ -49,6 +49,7 @@ public class Player : PlayerBehaviour {
 			Cherry item = basket.cherries [0];
 			basket.cherries.Remove (item);
 			tree.cherries.Add (item);
+			item.MoveToTree (ConstantsManager.instance.cherrysCordination["tree"+tree.index][item.index]);
 			item.transform.parent = tree.transform;
 		}
 		while (tree.cherries.Count > 0 && fillCount > 0) {
