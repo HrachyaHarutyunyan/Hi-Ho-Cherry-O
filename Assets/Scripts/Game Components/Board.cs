@@ -15,19 +15,18 @@ public class Board : Photon.MonoBehaviour {
 	}
 
 	private void InitBoard() {
-		float scaleY = -0.25f;
 		foreach (var item in GameManager.instance.players) {
 			Tree tree = new GameObject ("Tree").AddComponent<Tree> ();
 			item.tree = tree;
 			tree.transform.parent = transform;
-			trees.Add (tree);
+			trees.Add (tree); 
 			tree.index = trees.Count - 1;
 			SpriteRenderer spriteRenderer = tree.gameObject.AddComponent<SpriteRenderer> ();
 			spriteRenderer.sprite =  Resources.Load<Sprite>("Textures/tree"+tree.index);
 			spriteRenderer.sortingOrder = 1;
 			tree.gameObject.transform.position = ConstantsManager.instance.treesCordination["tree"+tree.index];
-			tree.gameObject.transform.localScale = new Vector2 (0.25f,scaleY);
-			scaleY *= -1;
+			tree.gameObject.transform.localScale = ConstantsManager.instance.treesScales["tree"+tree.index];
+			tree.gameObject.transform.Rotate(ConstantsManager.instance.treesScales["tree"+tree.index]);
 			Basket basket = new GameObject ("Basket").AddComponent<Basket> ();
 			item.basket = basket;
 			basket.transform.parent = transform;
