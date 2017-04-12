@@ -16,13 +16,13 @@ public class RandomMatchmaker : PunBehaviour
 
 	public override void OnJoinedLobby()
 	{
-		PhotonNetwork.JoinRandomRoom();
+		PhotonNetwork.JoinOrCreateRoom ("24", new RoomOptions(), TypedLobby.Default);
 	}
 
 	void OnPhotonRandomJoinFailed()
 	{
 		Debug.Log("Can't join random room!");
-		PhotonNetwork.CreateRoom(null);
+		PhotonNetwork.CreateRoom("23");
 	}
 
 	public override void OnJoinedRoom ()

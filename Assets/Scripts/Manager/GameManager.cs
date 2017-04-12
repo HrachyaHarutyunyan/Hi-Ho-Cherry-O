@@ -85,9 +85,9 @@ public class GameManager : Photon.MonoBehaviour {
 			}
 			foreach (var item in players) {
 				if (item.photonView.isSceneView) {
-					item.name = PhotonNetwork.playerName;
-					item.playerName = item.name;
+					item.playerName = PhotonNetwork.playerName;
 					item.photonView.TransferOwnership (PhotonNetwork.player);
+					item.photonView.RPC ("ChangePLayerName", PhotonTargets.All, PhotonNetwork.playerName);
 				} else {
 					item.name = "master";
 					item.playerName = item.name;
