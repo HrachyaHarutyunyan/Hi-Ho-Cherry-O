@@ -56,6 +56,7 @@ public class Player : PlayerBehaviour {
 			Cherry item = tree.cherries [0];
 			tree.cherries.Remove (item);
 			basket.cherries.Add (item);
+			item.MoveToBasket (basket);
 			item.transform.parent = basket.transform;
 		}
 		Debug.Log (playerName + " action is " + currentAction + " tree = " + tree.cherries.Count + " basket = " + basket.cherries.Count);
