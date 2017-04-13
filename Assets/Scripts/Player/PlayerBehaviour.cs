@@ -12,8 +12,8 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	}
 
 	public void EndTurn() {
+		UnregisterListeners ();
 		if (photonView.isMine) {
-//			UnregisterListeners ();
 			EventManager.TriggerEvent (EventManager.TURN_ENDED);
 		}
 	}
@@ -35,7 +35,7 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	}
 
 	public virtual void RouletteSpiningEnded() {
-		Debug.Log ("RouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEnded");
+//		Debug.Log ("RouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEnded");
 		//		photonView.RPC ("RouletteSpinResult", PhotonTargets.AllViaServer, null);
 	}
 }

@@ -6,7 +6,6 @@ public class Player : PlayerBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		RegisterListeners ();
 	}
 	
 	// Update is called once per frame
@@ -104,8 +103,7 @@ public class Player : PlayerBehaviour {
 	[PunRPC]
 	public void StartTurnRPC() {
 		Debug.Log (playerName + " started his turn with " + tree.cherries.Count + " cherries on tree");
-		if (photonView.isMine) {
-			myTurn = true;
-		}
+		RegisterListeners ();
+		myTurn = true;
 	}
 }
