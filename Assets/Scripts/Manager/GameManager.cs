@@ -103,13 +103,15 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void StartGame() {
-		int playerIndex = Random.Range (0, players.Count - 1);
-		PlayerBehaviour tmp = players [0];
-		players [0] = players [playerIndex];
-		players [playerIndex] = tmp;
+		if (PhotonNetwork.isMasterClient) {
+			int playerIndex = Random.Range (0, players.Count - 1);
+			PlayerBehaviour tmp = players [0];
+			players [0] = players [playerIndex];
+			players [playerIndex] = tmp;
 
-		currentPlayerIndex = 0;
-		players [currentPlayerIndex].StartTurn ();
+			currentPlayerIndex = 0;
+			players [currentPlayerIndex].StartTurn ();
+		}
 	}
 
 	public void TurnEnded() {
