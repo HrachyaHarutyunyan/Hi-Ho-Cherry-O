@@ -13,7 +13,6 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 
 	public void EndTurn() {
 		if (photonView.isMine) {
-			myTurn = false;
 			UnregisterListeners ();
 			EventManager.TriggerEvent (EventManager.TURN_ENDED);
 		}

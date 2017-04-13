@@ -124,6 +124,7 @@ public class GameManager : Photon.MonoBehaviour {
 		if (currentPlayerIndex == players.Count) {
 			currentPlayerIndex = 0;
 		}
+
 		players [currentPlayerIndex].StartTurn ();
 	}
 }

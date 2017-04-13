@@ -13,6 +13,7 @@ public class Player : PlayerBehaviour {
 	void Update () {
 		if (photonView.isMine && myTurn) {
 			if (Input.GetMouseButtonDown (0)) {
+				myTurn = false;
 				photonView.RPC ("SpinRoulette", PhotonTargets.MasterClient, null);
 			}
 		}
