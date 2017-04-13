@@ -21,6 +21,7 @@ public class Board : MonoBehaviour {
 			tree.transform.parent = transform;
 			trees.Add (tree); 
 			tree.index = trees.Count - 1;
+
 			SpriteRenderer spriteRenderer = tree.gameObject.AddComponent<SpriteRenderer> ();
 			spriteRenderer.sprite =  Resources.Load<Sprite>("Textures/tree"+tree.index);
 			spriteRenderer.sortingOrder = 1;

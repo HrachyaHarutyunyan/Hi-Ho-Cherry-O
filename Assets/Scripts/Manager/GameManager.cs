@@ -104,7 +104,7 @@ public class GameManager : Photon.MonoBehaviour {
 
 	public void StartGame() {
 		if (PhotonNetwork.isMasterClient) {
-			int playerIndex = Random.Range (0, players.Count - 1);
+			int playerIndex = Random.Range (0, players.Count);
 			PlayerBehaviour tmp = players [0];
 			players [0] = players [playerIndex];
 			players [playerIndex] = tmp;

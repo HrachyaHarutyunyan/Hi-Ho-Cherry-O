@@ -6,7 +6,7 @@ public class Player : PlayerBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		RegisterListeners ();
 	}
 	
 	// Update is called once per frame
@@ -19,8 +19,14 @@ public class Player : PlayerBehaviour {
 		}
 	}
 
+	public override void RouletteSpiningEnded() {
+		Debug.Log ("RouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEnded");
+		//		photonView.RPC ("RouletteSpinResult", PhotonTargets.AllViaServer, null);
+		RouletteSpinResult ();
+	}
+
 	[PunRPC]
-	private void RouletteSpinResult() {
+	public void RouletteSpinResult() {
 		Roulette.RouletteAction currentAction = GameManager.instance.board.roulette.currentAction;
 		int fillCount = 0;
 		int emptyCount = 0;
@@ -100,7 +106,6 @@ public class Player : PlayerBehaviour {
 		Debug.Log (playerName + " started his turn with " + tree.cherries.Count + " cherries on tree");
 		if (photonView.isMine) {
 			myTurn = true;
-			RegisterListeners ();
 		}
 	}
 }

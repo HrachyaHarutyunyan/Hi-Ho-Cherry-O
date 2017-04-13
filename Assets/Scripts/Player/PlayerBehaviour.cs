@@ -13,7 +13,7 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 
 	public void EndTurn() {
 		if (photonView.isMine) {
-			UnregisterListeners ();
+//			UnregisterListeners ();
 			EventManager.TriggerEvent (EventManager.TURN_ENDED);
 		}
 	}
@@ -23,14 +23,19 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	}
 
 	protected virtual void RegisterListeners() {
+		Debug.Log ("RegisterListeners in playerbehaviour");
+
 		EventManager.StartListening (EventManager.ROULETTE_SPIN_ENDED, RouletteSpiningEnded);
 	}
 
 	protected virtual void UnregisterListeners() {
+		Debug.Log ("UnregisterListeners in playerbehaviour");
+
 		EventManager.StopListening (EventManager.ROULETTE_SPIN_ENDED, RouletteSpiningEnded);
 	}
 
-	private void RouletteSpiningEnded() {
-		photonView.RPC ("RouletteSpinResult", PhotonTargets.AllViaServer, null);
+	public virtual void RouletteSpiningEnded() {
+		Debug.Log ("RouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEnded");
+		//		photonView.RPC ("RouletteSpinResult", PhotonTargets.AllViaServer, null);
 	}
 }

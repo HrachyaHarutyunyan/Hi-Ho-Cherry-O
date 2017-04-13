@@ -29,7 +29,8 @@ public class Arrow : Photon.MonoBehaviour {
 		iTween.RotateBy (gameObject,iTween.Hash("z",-eulerAngle,"time",rotateTime,"oncomplete","SpinComplete"));
 	}
 
-	public void SpinComplete(){
+	public void SpinComplete() {
+		Debug.Log ("spin complete");
 		startSpin = false;
 		arrowStoped = true;
 		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;
