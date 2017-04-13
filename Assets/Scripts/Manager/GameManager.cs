@@ -31,7 +31,6 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	private void CreateGameBoard() {
-		Debug.Log ("createe7h");
 		board = new GameObject ("Board").AddComponent<Board> ();
 		board.gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/background");
 	}
@@ -123,7 +122,7 @@ public class GameManager : Photon.MonoBehaviour {
 	[PunRPC]
 	private void TurnEndedRPC() {
 		playersEndedCount++;
-		if (playersEndedCount == 2) {
+		if (playersEndedCount == players.Count) {
 			playersEndedCount = 0;
 			currentPlayerIndex++;
 			if (currentPlayerIndex == players.Count) {

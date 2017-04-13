@@ -88,18 +88,6 @@ public class Player : PlayerBehaviour {
 		}
 	}
 
-//	protected override void RegisterListeners ()
-//	{
-//		base.RegisterListeners ();
-//		EventManager.StartListening (EventManager.PLAYER_SPINED_ROULETTE, GameManager.instance.board.roulette.SpinRoullette);
-//	}
-
-//	protected override void UnregisterListeners ()
-//	{
-//		base.UnregisterListeners ();
-//		EventManager.StopListening (EventManager.PLAYER_SPINED_ROULETTE, GameManager.instance.board.roulette.SpinRoullette);
-//	}
-
 	[PunRPC]
 	public void StartTurnRPC() {
 		Debug.Log (playerName + " started his turn with " + tree.cherries.Count + " cherries on tree");

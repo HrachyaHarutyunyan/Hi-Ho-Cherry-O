@@ -45,13 +45,12 @@ public class RandomMatchmaker : PunBehaviour
 	public override void OnPhotonPlayerConnected (PhotonPlayer newPlayer)
 	{
 		base.OnPhotonPlayerConnected (newPlayer);
-		if (PhotonNetwork.playerList.Length == 2) {
+		if (PhotonNetwork.playerList.Length == GameManager.instance.players.Count) {
 			Invoke ("StartGame", 2f);
 		}
 	}
 
 	private void StartGame() {
-		Debug.Log ("Game Started !!!!!");
 		EventManager.TriggerEvent (EventManager.CHERRIES_CREATED);
 	}
 }

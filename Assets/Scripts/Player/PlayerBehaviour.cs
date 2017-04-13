@@ -23,14 +23,10 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	}
 
 	protected virtual void RegisterListeners() {
-		Debug.Log ("RegisterListeners in playerbehaviour");
-
 		EventManager.StartListening (EventManager.ROULETTE_SPIN_ENDED, RouletteSpiningEnded);
 	}
 
 	protected virtual void UnregisterListeners() {
-		Debug.Log ("UnregisterListeners in playerbehaviour");
-
 		EventManager.StopListening (EventManager.ROULETTE_SPIN_ENDED, RouletteSpiningEnded);
 	}
 
