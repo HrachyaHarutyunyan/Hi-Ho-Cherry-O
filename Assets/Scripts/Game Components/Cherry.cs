@@ -24,4 +24,12 @@ public class Cherry : MonoBehaviour {
 	public void CherryInBasket(){
 		Debug.Log ("+======CherryInBasket");
 	}
+
+	public void MoveToTree(Vector3 cordsOnTree){
+		iTween.MoveTo (gameObject,iTween.Hash("x",cordsOnTree.x,"y",cordsOnTree.y,"z",cordsOnTree.z,"oncomplete","CherryOnTree"));
+	}
+
+	public void CherryOnTree(){
+		Debug.Log ("+======cherryontree");
+	}
 }
