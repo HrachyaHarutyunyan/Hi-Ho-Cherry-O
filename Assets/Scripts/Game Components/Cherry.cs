@@ -22,7 +22,7 @@ public class Cherry : MonoBehaviour {
 	}
 
 	public void CherryInBasket(){
-		Debug.Log ("+======CherryInBasket");
+//		Debug.Log ("+======CherryInBasket");
 	}
 
 	public void MoveToTree(Vector3 cordsOnTree){
@@ -30,6 +30,6 @@ public class Cherry : MonoBehaviour {
 	}
 
 	public void CherryOnTree(){
-		Debug.Log ("+======cherryontree");
+//		Debug.Log ("+======cherryontree");
 	}
 }

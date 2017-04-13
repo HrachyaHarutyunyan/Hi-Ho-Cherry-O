@@ -72,6 +72,7 @@ public class Player : PlayerBehaviour {
 	[PunRPC]
 	private void ChangePLayerName(string name) {
 		this.name = name;
+		this.playerName = name;
 	}
 
 	[PunRPC]
