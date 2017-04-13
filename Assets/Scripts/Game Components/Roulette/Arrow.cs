@@ -30,7 +30,6 @@ public class Arrow : Photon.MonoBehaviour {
 	}
 
 	public void SpinComplete() {
-		Debug.Log ("spin complete");
 		startSpin = false;
 		arrowStoped = true;
 		GameManager.instance.board.roulette.currentAction = currentSector.GetComponent<Sector> ().action;

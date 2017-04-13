@@ -13,9 +13,9 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 
 	public void EndTurn() {
 		UnregisterListeners ();
-		if (photonView.isMine) {
+//		if (photonView.isMine) {
 			EventManager.TriggerEvent (EventManager.TURN_ENDED);
-		}
+//		}
 	}
 
 	protected bool CheckForWinner() {

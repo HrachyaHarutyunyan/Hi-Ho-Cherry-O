@@ -18,6 +18,8 @@ public class GameManager : Photon.MonoBehaviour {
 	public Board board;
 	public int currentPlayerIndex;
 
+	private int playersEndedCount = 0;
+
 	// Use this for initialization
 	void Awake () {
 		if (instance == null) {
@@ -120,11 +122,15 @@ public class GameManager : Photon.MonoBehaviour {
 
 	[PunRPC]
 	private void TurnEndedRPC() {
-		currentPlayerIndex++;
-		if (currentPlayerIndex == players.Count) {
-			currentPlayerIndex = 0;
-		}
+		playersEndedCount++;
+		if (playersEndedCount == 2) {
+			playersEndedCount = 0;
+			currentPlayerIndex++;
+			if (currentPlayerIndex == players.Count) {
+				currentPlayerIndex = 0;
+			}
 
-		players [currentPlayerIndex].StartTurn ();
+			players [currentPlayerIndex].StartTurn ();
+		}
 	}
 }
