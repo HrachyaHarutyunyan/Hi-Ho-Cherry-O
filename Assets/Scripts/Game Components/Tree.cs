@@ -28,7 +28,7 @@ public class Tree : MonoBehaviour {
 			SpriteRenderer spriteRenderer = cherry.gameObject.AddComponent<SpriteRenderer> ();
 			spriteRenderer.sprite =  Resources.Load<Sprite>("Textures/cherry");
 			spriteRenderer.sortingOrder = 3;
-			cherry.gameObject.transform.position = ConstantsManager.instance.cherrysCordination["tree"+index][cherry.index];
+			cherry.gameObject.transform.localPosition = ConstantsManager.instance.cherrysCordination["tree"+index][cherry.index];
 		}
 	}
 }

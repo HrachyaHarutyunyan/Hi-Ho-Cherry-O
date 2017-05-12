@@ -54,30 +54,30 @@ public class ConstantsManager : MonoBehaviour {
 
 		List<Vector2> trees0CherrysCordsList = new List<Vector2> ();
 
-		trees0CherrysCordsList.Add (new Vector2(-0.5f,0.93f));
-		trees0CherrysCordsList.Add (new Vector2(0.5f,1f));
-		trees0CherrysCordsList.Add (new Vector2(-1f,1.4f));
-		trees0CherrysCordsList.Add (new Vector2(-1.5f,1.8f));
-		trees0CherrysCordsList.Add (new Vector2(-2f,2f));
-		trees0CherrysCordsList.Add (new Vector2(-2.3f,2.23f));
-		trees0CherrysCordsList.Add (new Vector2(-2.6f,2.4f));
-		trees0CherrysCordsList.Add (new Vector2(-3.2f,2f));
-		trees0CherrysCordsList.Add (new Vector2(-3.3f,2.3f));
-		trees0CherrysCordsList.Add (new Vector2(-3.6f,1.2f));
+		trees0CherrysCordsList.Add (new Vector2(3.19f, 3.9f));
+		trees0CherrysCordsList.Add (new Vector2(-0.38f, 1.5f));
+		trees0CherrysCordsList.Add (new Vector2(3.95f, 0.1f));
+		trees0CherrysCordsList.Add (new Vector2(-1.52f, 3.2f));
+		trees0CherrysCordsList.Add (new Vector2(1.2f, 4.4f));
+		trees0CherrysCordsList.Add (new Vector2(1.72f, -0.3f));
+		trees0CherrysCordsList.Add (new Vector2(1.91f, 2f));
+		trees0CherrysCordsList.Add (new Vector2(-1.71f, -0.15f));
+		trees0CherrysCordsList.Add (new Vector2(3f, -1f));
+		trees0CherrysCordsList.Add (new Vector2(4f, 2.3f));
 
 		cherrysCordination.Add ("tree0",trees0CherrysCordsList);
 
 		List<Vector2> trees1CherrysCordsList = new List<Vector2> ();
-		trees1CherrysCordsList.Add (new Vector2(-0.5f,0.93f));
-		trees1CherrysCordsList.Add (new Vector2(0.5f,1f));
-		trees1CherrysCordsList.Add (new Vector2(-1f,1.4f));
-		trees1CherrysCordsList.Add (new Vector2(-1.5f,1.8f));
-		trees1CherrysCordsList.Add (new Vector2(-2f,2f));
-		trees1CherrysCordsList.Add (new Vector2(-2.3f,2.23f));
-		trees1CherrysCordsList.Add (new Vector2(-2.6f,2.4f));
-		trees1CherrysCordsList.Add (new Vector2(-3.2f,2f));
-		trees1CherrysCordsList.Add (new Vector2(-3.3f,2.3f));
-		trees1CherrysCordsList.Add (new Vector2(-3.6f,1.2f));
+		trees1CherrysCordsList.Add (new Vector2(4.5f, -2.7f));
+		trees1CherrysCordsList.Add (new Vector2(5f, 1.6f));
+		trees1CherrysCordsList.Add (new Vector2(0.5f, 1.5f));
+		trees1CherrysCordsList.Add (new Vector2(3.8f, -0.5f));
+		trees1CherrysCordsList.Add (new Vector2(6f, -0.75f));
+		trees1CherrysCordsList.Add (new Vector2(4f, 3.3f));
+		trees1CherrysCordsList.Add (new Vector2(6.6f, 0.85f));
+		trees1CherrysCordsList.Add (new Vector2(2.32f, 3.1f));
+		trees1CherrysCordsList.Add (new Vector2(2.6f, 1.3f));
+		trees1CherrysCordsList.Add (new Vector2(2.47f, -0.4f));
 
 		cherrysCordination.Add ("tree1",trees1CherrysCordsList);
 

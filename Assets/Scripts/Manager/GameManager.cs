@@ -71,6 +71,7 @@ public class GameManager : Photon.MonoBehaviour {
 				size = 1;
 				break;
 			}
+			size = 2;
 			for (int i = 1; i < size; i++) {
 				playerObj = PhotonNetwork.InstantiateSceneObject ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0, null);
 				player = playerObj.GetComponent<Player> ();
