@@ -6,6 +6,7 @@ public class Player : PlayerBehaviour {
 
 	// Use this for initialization
 	void Start () {
+//		myTurn = true;
 	}
 	
 	// Update is called once per frame

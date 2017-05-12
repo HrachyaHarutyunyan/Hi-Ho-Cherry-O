@@ -99,7 +99,7 @@ public class GameManager : Photon.MonoBehaviour {
 
 	public void CreateGame() {
 		CreateGameBoard ();
-		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.TWO_PLAYER;
+		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
 		InitPlayers (mode);
 	}
 

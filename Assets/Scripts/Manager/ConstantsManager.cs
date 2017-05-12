@@ -34,20 +34,20 @@ public class ConstantsManager : MonoBehaviour {
 	public void Init(){
 		/////////////////////////tree/////////////////////////////////////////
 
-		treesCordination.Add ("tree0",new Vector2(-2.35f,0.93f));
-		treesCordination.Add ("tree1",new Vector2(2.2f,-1.17f));
-		treesCordination.Add ("tree2",new Vector2(2.97f,1.73f));
-		treesCordination.Add ("tree3",new Vector2(2.86f,1.63f));
+		treesCordination.Add ("tree0",new Vector2(9.4f,-5.6f));
+		treesCordination.Add ("tree1",new Vector2(-11.9f,-4.8f));
+		treesCordination.Add ("tree2",new Vector2(-9.3f,5.6f));
+		treesCordination.Add ("tree3",new Vector2(11.8f,5f));
 
 		treesRotation.Add ("tree0",new Vector3(0,0,0));
 		treesRotation.Add ("tree1",new Vector3(0,0,0));
 		treesRotation.Add ("tree2",new Vector3(0,0,-43.52f));
 		treesRotation.Add ("tree3",new Vector3(0,0,-73.85f));
 
-		treesScales.Add ("tree0",new Vector2(0.25f,-0.25f));
-		treesScales.Add ("tree1",new Vector2(0.25f,0.25f));
-		treesScales.Add ("tree2",new Vector2(0.25f,-0.25f));
-		treesScales.Add ("tree3",new Vector2(0.25f,0.25f));
+		treesScales.Add ("tree0",new Vector2(1f,1f));
+		treesScales.Add ("tree1",new Vector2(1f,1f));
+		treesScales.Add ("tree2",new Vector2(-1f,-1f));
+		treesScales.Add ("tree3",new Vector2(-1f,-1f));
 
 		/////////////////////////////////////////////////////////////////////
 		/////////////////////////////cherrys//////////////////////////////////////

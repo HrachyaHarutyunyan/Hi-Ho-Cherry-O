@@ -26,7 +26,7 @@ public class Board : MonoBehaviour {
 			spriteRenderer.sortingOrder = 1;
 			tree.gameObject.transform.position = ConstantsManager.instance.treesCordination["tree"+tree.index];
 			tree.gameObject.transform.localScale = ConstantsManager.instance.treesScales["tree"+tree.index];
-			tree.gameObject.transform.Rotate(ConstantsManager.instance.treesRotation["tree"+tree.index]);
+//			tree.gameObject.transform.Rotate(ConstantsManager.instance.treesRotation["tree"+tree.index]);
 			tree.Init ();
 			Basket basket = new GameObject ("Basket").AddComponent<Basket> ();
 			item.basket = basket;
