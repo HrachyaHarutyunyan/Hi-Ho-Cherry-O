@@ -6,6 +6,14 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	public Tree tree;
 	public string playerName;
 	public bool myTurn;
+	public SeasonType season;
+
+	public enum SeasonType {
+		WINTER,
+		SPRING,
+		SUMMER,
+		AUTUMN
+	}
 
 	public virtual void StartTurn() {
 		photonView.RPC ("StartTurnRPC", PhotonTargets.AllViaServer, null);

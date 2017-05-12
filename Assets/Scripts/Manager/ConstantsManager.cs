@@ -10,6 +10,7 @@ public class ConstantsManager : MonoBehaviour {
 	public  Dictionary<string,Vector2> treesCordination = new Dictionary<string,Vector2>();
 	public  Dictionary<string,Vector3> treesRotation = new Dictionary<string,Vector3>();
 	public  Dictionary<string,Vector2> treesScales = new Dictionary<string,Vector2>();
+	public  Dictionary<string,Vector2> basketCordination = new Dictionary<string,Vector2>();
 
 	public  Dictionary<string,List<Vector2>> cherrysCordination = new Dictionary<string,List<Vector2>>();
 
@@ -109,6 +110,7 @@ public class ConstantsManager : MonoBehaviour {
 
 		cherrysCordination.Add ("tree3",trees3CherrysCordsList);
 
-
+		basketCordination.Add ("dzmer1v", new Vector2(5.716f, -8.869f));
+		basketCordination.Add ("garun_v", new Vector2(-16.17f, -5.24f));
 	}
 }
