@@ -62,7 +62,9 @@ public class GameManager : Photon.MonoBehaviour {
 			PlayerBehaviour player = playerObj.GetComponent<Player> ();
 			player.playerName = PhotonNetwork.playerName;
 			players.Add (player);
-			photonView.RPC ("SetPlayerSeason", PhotonTargets.All, 0);
+			int index = UnityEngine.Random.Range (0, seasonIndices.Count);
+			photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {0, index});
+			seasonIndices.Remove (index);
 			int size = 0;
 			switch (mode) {
 			case GameMode.TWO_PLAYER:
@@ -85,7 +87,9 @@ public class GameManager : Photon.MonoBehaviour {
 				player.playerName = "EmptyPlayer" + i;
 				player.name = "EmptyPlayer";
 				players.Add (player);
-				photonView.RPC ("SetPlayerSeason", PhotonTargets.All, i);
+				index = UnityEngine.Random.Range (0, seasonIndices.Count);
+				photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {i, index});
+				seasonIndices.Remove (index);
 				Debug.Log ("season = " + player.season);
 			}
 		} else {
@@ -127,10 +131,8 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	[PunRPC]
-	private void SetPlayerSeason(int playerIndex) {
-		int index = UnityEngine.Random.Range (0, seasonIndices.Count);
-		players[playerIndex].season = (SeasonType)Enum.GetValues (typeof(SeasonType)).GetValue (seasonIndices[index]);
-		seasonIndices.Remove (index);
+	private void SetPlayerSeason(int playerIndex, int seasonIndex) {
+		players[playerIndex].season = (SeasonType)Enum.GetValues (typeof(SeasonType)).GetValue (seasonIndices[seasonIndex]);
 	}
 
 	public void TurnEnded() {
