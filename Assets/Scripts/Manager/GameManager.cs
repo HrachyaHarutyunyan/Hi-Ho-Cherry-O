@@ -37,7 +37,6 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void CreateGameBoard() {
-		Debug.Log ("createGameBoard");
 		board = new GameObject ("Board").AddComponent<Board> ();
 		board.gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/background");
 	}
@@ -115,9 +114,9 @@ public class GameManager : Photon.MonoBehaviour {
 	public void CreateGame() {
 		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
 		InitPlayers (mode);
-//		if (PhotonNetwork.isMasterClient) {
-//			CreateGameBoard ();
-//		}
+		if (PhotonNetwork.isMasterClient) {
+			CreateGameBoard ();
+		}
 	}
 
 	public void StartGame() {

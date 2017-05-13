@@ -34,9 +34,7 @@ public class Player : PlayerBehaviour {
 	[PunRPC]
 	private void SetSeasonRPC(int season) {
 		this.season = (SeasonType)season;
-		Debug.Log ("setseasonrpc " + playerName);
-		if (++initSeasonCount == GameManager.instance.players.Count) {
-			Debug.Log ("initSeasonCount = " + playerName);
+		if (++initSeasonCount == GameManager.instance.players.Count && GameManager.instance.board) {
 			GameManager.instance.CreateGameBoard ();
 		}
 	}
