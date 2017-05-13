@@ -26,7 +26,7 @@ public class Cherry : MonoBehaviour {
 	}
 
 	public void MoveToTree(Vector3 cordsOnTree){
-		iTween.MoveTo (gameObject,iTween.Hash("x",cordsOnTree.x,"y",cordsOnTree.y,"z",cordsOnTree.z,"oncomplete","CherryOnTree"));
+		iTween.MoveTo (gameObject,iTween.Hash("x",cordsOnTree.x,"y",cordsOnTree.y,"z",cordsOnTree.z,"islocal", true,"oncomplete","CherryOnTree"));
 	}
 
 	public void CherryOnTree(){
