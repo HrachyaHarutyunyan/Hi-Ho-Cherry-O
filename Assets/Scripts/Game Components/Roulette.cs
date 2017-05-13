@@ -39,4 +39,7 @@ public class Roulette : Photon.MonoBehaviour {
 	public void SpinRoullette() {
 		arrow.StartSpin ();
 	}
+	public void SpinComplete() {
+		iTween.ScaleTo (gameObject,iTween.Hash("x",1f,"y",1f,"time",2));
+	}
 }

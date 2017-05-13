@@ -26,6 +26,8 @@ public class Arrow : Photon.MonoBehaviour {
 	[PunRPC]
 	private void SpinRPC(float eulerAngle, float oneRotateTime) {
 		rotateTime = eulerAngle * oneRotateTime;
+		GameObject rouletteGameObject = GameManager.instance.board.roulette.gameObject;
+		iTween.ScaleTo (rouletteGameObject,iTween.Hash("x",1.5f,"y",1.5f,"time",2,"oncomplete","SpinComplete"));
 		iTween.RotateBy (gameObject,iTween.Hash("z",-eulerAngle,"time",rotateTime,"oncomplete","SpinComplete"));
 	}
 
