@@ -37,6 +37,7 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void CreateGameBoard() {
+		Debug.Log ("createGameBoard");
 		board = new GameObject ("Board").AddComponent<Board> ();
 		board.gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/background");
 	}
@@ -90,7 +91,6 @@ public class GameManager : Photon.MonoBehaviour {
 				index = UnityEngine.Random.Range (0, seasonIndices.Count);
 				photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {i, seasonIndices[index]});
 				seasonIndices.Remove (index);
-				Debug.Log ("season = " + player.season);
 			}
 		} else {
 			EventManager.StopListening (EventManager.ROULETTE_CREATED, CreateGame);
@@ -108,7 +108,6 @@ public class GameManager : Photon.MonoBehaviour {
 					item.playerName = item.name;
 				}
 				item.InitSeason ();
-				EventManager.StartListening ("SeasonInited", CreateGameBoard);
 			}
 		}
 	}

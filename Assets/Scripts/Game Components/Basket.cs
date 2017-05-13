@@ -14,7 +14,6 @@ public class Basket : MonoBehaviour {
 		spriteRenderer = gameObject.AddComponent<SpriteRenderer> ();
 		string texturePath = player.GetTexturePath () + "B";
 		spriteRenderer.sprite = Resources.Load<Sprite> (texturePath);
-		Debug.Log ("texture path = " + texturePath);
 		transform.position = ConstantsManager.instance.basketCordination [texturePath];
 	}
 	

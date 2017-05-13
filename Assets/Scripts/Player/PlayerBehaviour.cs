@@ -30,7 +30,6 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 				texturePath += "summer";
 			}
 			if (GameManager.instance.players.IndexOf (this) % 2 != 0) {
-				Debug.Log ("indexof != " + 0);
 				texturePath += "R";
 			}
 		}

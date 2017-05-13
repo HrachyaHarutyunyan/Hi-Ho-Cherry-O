@@ -34,14 +34,14 @@ public class Player : PlayerBehaviour {
 	[PunRPC]
 	private void SetSeasonRPC(int season) {
 		this.season = (SeasonType)season;
+		Debug.Log ("setseasonrpc " + playerName);
 		if (++initSeasonCount == GameManager.instance.players.Count) {
-			EventManager.TriggerEvent ("SeasonInited");
-			EventManager.StopListening ("SeasonInited", GameManager.instance.CreateGameBoard);
+			Debug.Log ("initSeasonCount = " + playerName);
+			GameManager.instance.CreateGameBoard ();
 		}
 	}
 
 	public override void RouletteSpiningEnded() {
-		Debug.Log ("RouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEnded");
 		//		photonView.RPC ("RouletteSpinResult", PhotonTargets.AllViaServer, null);
 		RouletteSpinResult ();
 	}
