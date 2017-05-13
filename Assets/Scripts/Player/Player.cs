@@ -5,6 +5,8 @@ using System;
 
 public class Player : PlayerBehaviour {
 
+	static int initSeasonCount = 0;
+
 	// Use this for initialization
 	void Start () {
 //		myTurn = true;
@@ -32,8 +34,10 @@ public class Player : PlayerBehaviour {
 	[PunRPC]
 	private void SetSeasonRPC(int season) {
 		this.season = (SeasonType)season;
-		EventManager.TriggerEvent ("SeasonInited");
-		EventManager.StopListening ("SeasonInited", GameManager.instance.CreateGameBoard);
+		if (++initSeasonCount == GameManager.instance.players.Count) {
+			EventManager.TriggerEvent ("SeasonInited");
+			EventManager.StopListening ("SeasonInited", GameManager.instance.CreateGameBoard);
+		}
 	}
 
 	public override void RouletteSpiningEnded() {
