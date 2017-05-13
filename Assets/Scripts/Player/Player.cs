@@ -31,7 +31,7 @@ public class Player : PlayerBehaviour {
 
 	[PunRPC]
 	private void SetSeasonRPC(int season) {
-		this.season = (int)season;
+		this.season = (SeasonType)season;
 	}
 
 	public override void RouletteSpiningEnded() {
