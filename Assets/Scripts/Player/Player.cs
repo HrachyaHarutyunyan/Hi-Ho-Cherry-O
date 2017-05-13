@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : PlayerBehaviour {
 
@@ -17,6 +18,20 @@ public class Player : PlayerBehaviour {
 				photonView.RPC ("SpinRoulette", PhotonTargets.MasterClient, null);
 			}
 		}
+	}
+
+	public void InitSeason() {
+		photonView.RPC ("RequestSeason", PhotonTargets.MasterClient, null);
+	}
+
+	[PunRPC]
+	private void RequestSeason() {
+		photonView.RPC ("SetSeasonRPC", PhotonTargets.All, (int)season);
+	}
+
+	[PunRPC]
+	private void SetSeasonRPC(int season) {
+		this.season = (int)season;
 	}
 
 	public override void RouletteSpiningEnded() {

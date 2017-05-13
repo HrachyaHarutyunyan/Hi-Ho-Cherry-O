@@ -107,6 +107,7 @@ public class GameManager : Photon.MonoBehaviour {
 					item.name = "master";
 					item.playerName = item.name;
 				}
+				item.InitSeason ();
 			}
 			Debug.Log ("players.count = " + players.Length);
 		}
