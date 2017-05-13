@@ -115,9 +115,9 @@ public class GameManager : Photon.MonoBehaviour {
 	public void CreateGame() {
 		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
 		InitPlayers (mode);
-		if (PhotonNetwork.isMasterClient) {
-			CreateGameBoard ();
-		}
+//		if (PhotonNetwork.isMasterClient) {
+//			CreateGameBoard ();
+//		}
 	}
 
 	public void StartGame() {
