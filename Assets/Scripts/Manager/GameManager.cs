@@ -63,7 +63,7 @@ public class GameManager : Photon.MonoBehaviour {
 			player.playerName = PhotonNetwork.playerName;
 			players.Add (player);
 			int index = UnityEngine.Random.Range (0, seasonIndices.Count);
-			photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {0, index});
+			photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {0, seasonIndices[index]});
 			seasonIndices.Remove (index);
 			int size = 0;
 			switch (mode) {
@@ -88,7 +88,7 @@ public class GameManager : Photon.MonoBehaviour {
 				player.name = "EmptyPlayer";
 				players.Add (player);
 				index = UnityEngine.Random.Range (0, seasonIndices.Count);
-				photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {i, index});
+				photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {i, seasonIndices[index]});
 				seasonIndices.Remove (index);
 				Debug.Log ("season = " + player.season);
 			}
