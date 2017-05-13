@@ -32,6 +32,8 @@ public class Player : PlayerBehaviour {
 	[PunRPC]
 	private void SetSeasonRPC(int season) {
 		this.season = (SeasonType)season;
+		EventManager.TriggerEvent ("SeasonInited");
+		EventManager.StopListening ("SeasonInited", GameManager.instance.CreateGameBoard);
 	}
 
 	public override void RouletteSpiningEnded() {

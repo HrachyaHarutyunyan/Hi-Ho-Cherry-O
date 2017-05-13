@@ -36,7 +36,7 @@ public class GameManager : Photon.MonoBehaviour {
 		}
 	}
 
-	private void CreateGameBoard() {
+	public void CreateGameBoard() {
 		board = new GameObject ("Board").AddComponent<Board> ();
 		board.gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/background");
 	}
@@ -108,15 +108,17 @@ public class GameManager : Photon.MonoBehaviour {
 					item.playerName = item.name;
 				}
 				item.InitSeason ();
+				EventManager.StartListening ("SeasonInited", CreateGameBoard);
 			}
-			Debug.Log ("players.count = " + players.Length);
 		}
 	}
 
 	public void CreateGame() {
 		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
 		InitPlayers (mode);
-		CreateGameBoard ();
+		if (PhotonNetwork.isMasterClient) {
+			CreateGameBoard ();
+		}
 	}
 
 	public void StartGame() {
@@ -133,7 +135,7 @@ public class GameManager : Photon.MonoBehaviour {
 
 	[PunRPC]
 	private void SetPlayerSeason(int playerIndex, int seasonIndex) {
-		players[playerIndex].season = (SeasonType)Enum.GetValues (typeof(SeasonType)).GetValue (seasonIndices[seasonIndex]);
+		players[playerIndex].season = (SeasonType)Enum.GetValues (typeof(SeasonType)).GetValue (seasonIndex);
 	}
 
 	public void TurnEnded() {
