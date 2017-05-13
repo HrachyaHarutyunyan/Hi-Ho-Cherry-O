@@ -22,7 +22,7 @@ public class Board : MonoBehaviour {
 			tree.index = trees.Count - 1;
 
 			SpriteRenderer spriteRenderer = tree.gameObject.AddComponent<SpriteRenderer> ();
-			spriteRenderer.sprite =  Resources.Load<Sprite>("Textures/tree"+tree.index);
+			spriteRenderer.sprite =  Resources.Load<Sprite>(item.GetTexturePath ());
 			spriteRenderer.sortingOrder = 1;
 			tree.gameObject.transform.position = ConstantsManager.instance.treesCordination["tree"+tree.index];
 			tree.gameObject.transform.localScale = ConstantsManager.instance.treesScales["tree"+tree.index];
@@ -31,6 +31,7 @@ public class Board : MonoBehaviour {
 			Basket basket = new GameObject ("Basket").AddComponent<Basket> ();
 			item.basket = basket;
 			basket.transform.parent = transform;
+			basket.player = item;
 			baskets.Add (basket);
 		}
 

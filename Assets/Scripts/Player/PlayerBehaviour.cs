@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System;
 
+public enum SeasonType {
+	WINTER,
+	SPRING,
+	SUMMER,
+	AUTUMN
+}
+
 public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	public Basket basket;
 	public Tree tree;
@@ -8,11 +15,26 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 	public bool myTurn;
 	public SeasonType season;
 
-	public enum SeasonType {
-		WINTER,
-		SPRING,
-		SUMMER,
-		AUTUMN
+	private string texturePath = "";
+
+	public string GetTexturePath() {
+		if (texturePath.Equals ("")) {
+			texturePath += "Textures/";
+			if (season == SeasonType.WINTER) {
+				texturePath += "winter";
+			} else if (season == SeasonType.SPRING) {
+				texturePath += "spring";
+			} else if (season == SeasonType.AUTUMN) {
+				texturePath += "autumn";
+			} else if (season == SeasonType.SUMMER) {
+				texturePath += "summer";
+			}
+			if (GameManager.instance.players.IndexOf (this) % 2 != 0) {
+				Debug.Log ("indexof != " + 0);
+				texturePath += "R";
+			}
+		}
+		return texturePath;
 	}
 
 	public virtual void StartTurn() {

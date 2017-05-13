@@ -110,7 +110,14 @@ public class ConstantsManager : MonoBehaviour {
 
 		cherrysCordination.Add ("tree3",trees3CherrysCordsList);
 
-		basketCordination.Add ("dzmer1v", new Vector2(5.716f, -8.869f));
-		basketCordination.Add ("garun_v", new Vector2(-16.17f, -5.24f));
+		basketCordination.Add ("Textures/winterB", new Vector2(5.716f, -8.869f));
+		basketCordination.Add ("Textures/summerB", new Vector2(5.716f, -8.869f));
+		basketCordination.Add ("Textures/autumnB", new Vector2(5.716f, -8.869f));
+		basketCordination.Add ("Textures/springB", new Vector2(5.716f, -8.869f));
+
+		basketCordination.Add ("Textures/winterRB", new Vector2(-16.17f, -5.24f));
+		basketCordination.Add ("Textures/summerRB", new Vector2(-16.17f, -5.24f));
+		basketCordination.Add ("Textures/autumnRB", new Vector2(-16.17f, -5.24f));
+		basketCordination.Add ("Textures/springRB", new Vector2(-16.17f, -5.24f));
 	}
 }

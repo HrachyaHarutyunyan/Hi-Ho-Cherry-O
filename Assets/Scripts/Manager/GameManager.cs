@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : Photon.MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class GameManager : Photon.MonoBehaviour {
 		FOUR_PLAYER,
 		MULTIPLAYER
 	}
+
+	List<int> seasonIndices = new List<int> ();
 
 	public static GameManager instance;
 
@@ -28,6 +31,9 @@ public class GameManager : Photon.MonoBehaviour {
 			Destroy (this);
 		}
 		RegisterListeners ();
+		for (int i = 0; i < 4; i++) {
+			seasonIndices.Add (i);
+		}
 	}
 
 	private void CreateGameBoard() {
@@ -56,6 +62,7 @@ public class GameManager : Photon.MonoBehaviour {
 			PlayerBehaviour player = playerObj.GetComponent<Player> ();
 			player.playerName = PhotonNetwork.playerName;
 			players.Add (player);
+			photonView.RPC ("SetPlayerSeason", PhotonTargets.All, 0);
 			int size = 0;
 			switch (mode) {
 			case GameMode.TWO_PLAYER:
@@ -78,6 +85,8 @@ public class GameManager : Photon.MonoBehaviour {
 				player.playerName = "EmptyPlayer" + i;
 				player.name = "EmptyPlayer";
 				players.Add (player);
+				photonView.RPC ("SetPlayerSeason", PhotonTargets.All, i);
+				Debug.Log ("season = " + player.season);
 			}
 		} else {
 			EventManager.StopListening (EventManager.ROULETTE_CREATED, CreateGame);
@@ -95,18 +104,19 @@ public class GameManager : Photon.MonoBehaviour {
 					item.playerName = item.name;
 				}
 			}
+			Debug.Log ("players.count = " + players.Length);
 		}
 	}
 
 	public void CreateGame() {
-		CreateGameBoard ();
 		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
 		InitPlayers (mode);
+		CreateGameBoard ();
 	}
 
 	public void StartGame() {
 		if (PhotonNetwork.isMasterClient) {
-			int playerIndex = Random.Range (0, players.Count);
+			int playerIndex = UnityEngine.Random.Range (0, players.Count);
 			PlayerBehaviour tmp = players [0];
 			players [0] = players [playerIndex];
 			players [playerIndex] = tmp;
@@ -114,6 +124,13 @@ public class GameManager : Photon.MonoBehaviour {
 			currentPlayerIndex = 0;
 			players [currentPlayerIndex].StartTurn ();
 		}
+	}
+
+	[PunRPC]
+	private void SetPlayerSeason(int playerIndex) {
+		int index = UnityEngine.Random.Range (0, seasonIndices.Count);
+		players[playerIndex].season = (SeasonType)Enum.GetValues (typeof(SeasonType)).GetValue (seasonIndices[index]);
+		seasonIndices.Remove (index);
 	}
 
 	public void TurnEnded() {

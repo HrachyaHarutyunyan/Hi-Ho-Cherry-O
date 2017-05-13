@@ -12,13 +12,10 @@ public class Basket : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		spriteRenderer = gameObject.AddComponent<SpriteRenderer> ();
-		if (PhotonNetwork.isMasterClient) {
-			spriteRenderer.sprite = Resources.Load<Sprite> ("Textures/dzmer1v");
-			transform.position = ConstantsManager.instance.basketCordination["dzmer1v"];
-		} else {
-			spriteRenderer.sprite = Resources.Load<Sprite> ("Textures/garun_v");
-			transform.position = ConstantsManager.instance.basketCordination["garun_v"];
-		}
+		string texturePath = player.GetTexturePath () + "B";
+		spriteRenderer.sprite = Resources.Load<Sprite> (texturePath);
+		Debug.Log ("texture path = " + texturePath);
+		transform.position = ConstantsManager.instance.basketCordination [texturePath];
 	}
 	
 	// Update is called once per frame
