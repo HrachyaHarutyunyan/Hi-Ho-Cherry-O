@@ -80,7 +80,6 @@ public class GameManager : Photon.MonoBehaviour {
 				size = 1;
 				break;
 			}
-			size = 2;
 			for (int i = 1; i < size; i++) {
 				playerObj = PhotonNetwork.InstantiateSceneObject ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0, null);
 				player = playerObj.GetComponent<Player> ();
@@ -112,7 +111,7 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void CreateGame() {
-		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
+		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.THREE_PLAYER;
 		InitPlayers (mode);
 		if (PhotonNetwork.isMasterClient) {
 			CreateGameBoard ();
