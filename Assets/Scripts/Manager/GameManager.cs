@@ -61,6 +61,7 @@ public class GameManager : Photon.MonoBehaviour {
 			playerObj.name = PhotonNetwork.playerName;
 			PlayerBehaviour player = playerObj.GetComponent<Player> ();
 			player.playerName = PhotonNetwork.playerName;
+			player.photonView.RPC ("SetEmpty", PhotonTargets.AllBuffered, false);
 			players.Add (player);
 			int index = UnityEngine.Random.Range (0, seasonIndices.Count);
 			photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {0, seasonIndices[index]});
@@ -81,7 +82,7 @@ public class GameManager : Photon.MonoBehaviour {
 				break;
 			}
 			for (int i = 1; i < size; i++) {
-				playerObj = PhotonNetwork.InstantiateSceneObject ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0, null);
+				playerObj = PhotonNetwork.Instantiate ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0);
 				player = playerObj.GetComponent<Player> ();
 				player.playerName = "EmptyPlayer" + i;
 				player.name = "EmptyPlayer";
@@ -96,11 +97,15 @@ public class GameManager : Photon.MonoBehaviour {
 			foreach (var item in players) {
 				this.players.Add (item);
 			}
+			bool itemTaken = false;
 			foreach (var item in players) {
-				if (item.photonView.isSceneView) {
-					item.playerName = PhotonNetwork.playerName;
-					item.photonView.TransferOwnership (PhotonNetwork.player);
-					item.photonView.RPC ("ChangePLayerName", PhotonTargets.All, PhotonNetwork.playerName);
+				if (item.isEmpty && !itemTaken) {
+					itemTaken = true;
+					Debug.Log ("item.issceneview = " + item.photonView.owner);
+					item.playerName = PhotonNetwork.playerName; 
+					item.photonView.RequestOwnership ();
+					item.photonView.RPC ("SetEmpty", PhotonTargets.AllBuffered, false);
+					item.photonView.RPC ("ChangePLayerName", PhotonTargets.AllBuffered, PhotonNetwork.playerName);
 				} else {
 					item.name = "master";
 					item.playerName = item.name;
@@ -111,7 +116,7 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void CreateGame() {
-		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.THREE_PLAYER;
+		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
 		InitPlayers (mode);
 		if (PhotonNetwork.isMasterClient) {
 			CreateGameBoard ();
