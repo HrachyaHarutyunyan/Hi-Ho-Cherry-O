@@ -6,6 +6,7 @@ using System;
 public class Player : PlayerBehaviour {
 
 	static int initSeasonCount = 0;
+	public bool isEmpty = true;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +23,9 @@ public class Player : PlayerBehaviour {
 		}
 	}
 
-	public void InitSeason() {
-		photonView.RPC ("RequestSeason", PhotonTargets.MasterClient, null);
+	[PunRPC]
+	private void SetEmpty(bool isEmpty) {
+		this.isEmpty = isEmpty;
 	}
 
 	[PunRPC]

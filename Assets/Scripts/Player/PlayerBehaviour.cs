@@ -63,4 +63,10 @@ public abstract class PlayerBehaviour : Photon.MonoBehaviour {
 //		Debug.Log ("RouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEndedRouletteSpiningEnded");
 		//		photonView.RPC ("RouletteSpinResult", PhotonTargets.AllViaServer, null);
 	}
+
+	public void InitSeason() {
+		photonView.RPC ("RequestSeason", PhotonTargets.MasterClient, null);
+	}
+
+
 }
