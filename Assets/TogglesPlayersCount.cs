@@ -11,7 +11,7 @@ public class TogglesPlayersCount : MonoBehaviour {
 	public Toggle fourPlayersToggle;
 
 
-	public void ActiveToggle(){
+	public void ActiveToggle(bool isMultiplayer){
 		int activeTogglesCount = 0;
 		if (onePlayerToggle.isOn) {
 			activeTogglesCount = 1;
@@ -25,7 +25,7 @@ public class TogglesPlayersCount : MonoBehaviour {
 				activeTogglesCount++;
 			}
 			if (activeTogglesCount > 1) {
-				gameObject.GetComponent<LoadSceneOnClick> ().InitGameMode (activeTogglesCount);
+				gameObject.GetComponent<LoadSceneOnClick> ().InitGameMode (activeTogglesCount,isMultiplayer);
 				gameObject.GetComponent<LoadSceneOnClick> ().LoadByIndex (1);
 			} else {
 				Debug.Log ("eli siktir elar...");
@@ -34,7 +34,7 @@ public class TogglesPlayersCount : MonoBehaviour {
 			Debug.Log ("siktir elar...");
 		}
 
-
+		Debug.Log ("=====activeTogglesCount "+activeTogglesCount);
 
 	}
 

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnClick : MonoBehaviour {
 
-	public void InitGameMode(int playerCount) {
+	public void InitGameMode(int playerCount,bool isMultiplayer) {
 		GameManager.GameMode gameMode = (GameManager.GameMode)playerCount;
 		if(ArgumentManager.instance.arguments.ContainsKey (ArgumentManager.GAME_MODE)) {
 			ArgumentManager.instance.arguments.Remove (ArgumentManager.GAME_MODE);
