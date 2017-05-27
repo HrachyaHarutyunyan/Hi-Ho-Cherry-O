@@ -7,10 +7,12 @@ public class GameManager : Photon.MonoBehaviour {
 
 	public enum GameMode
 	{
-		TWO_PLAYER = 2,
-		THREE_PLAYER,
-		FOUR_PLAYER,
-		MULTIPLAYER
+		MULTI_TWO_PLAYER = 2,
+		MULTI_THREE_PLAYER,
+		MULTI_FOUR_PLAYER,
+		SINGLE_TWO_PLAYER,
+		SINGLE_THREE_PLAYER,
+		SINGLE_FOUR_PLAYER,
 	}
 
 	List<int> seasonIndices = new List<int> ();
@@ -68,17 +70,14 @@ public class GameManager : Photon.MonoBehaviour {
 			seasonIndices.Remove (index);
 			int size = 0;
 			switch (mode) {
-			case GameMode.TWO_PLAYER:
+			case GameMode.MULTI_TWO_PLAYER:
 				size = 2;
 				break;
-			case GameMode.THREE_PLAYER:
+			case GameMode.MULTI_THREE_PLAYER:
 				size = 3;
 				break;
-			case GameMode.FOUR_PLAYER:
+			case GameMode.MULTI_FOUR_PLAYER:
 				size = 4;
-				break;
-			case GameMode.MULTIPLAYER:
-				size = 1;
 				break;
 			}
 			for (int i = 1; i < size; i++) {
@@ -116,7 +115,7 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void CreateGame() {
-		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.FOUR_PLAYER;
+		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.MULTI_FOUR_PLAYER;
 		InitPlayers (mode);
 		if (PhotonNetwork.isMasterClient) {
 			CreateGameBoard ();

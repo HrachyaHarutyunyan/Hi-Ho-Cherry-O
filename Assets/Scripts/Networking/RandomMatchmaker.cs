@@ -6,6 +6,7 @@ public class RandomMatchmaker : PunBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		PhotonNetwork.offlineMode = ArgumentManager.instance != null ? !(bool)ArgumentManager.instance.arguments[ArgumentManager.IS_MULTI_PLAYER] : false;
 		PhotonNetwork.ConnectUsingSettings("0.1");
 	}
 
