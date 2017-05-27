@@ -10,6 +10,7 @@ public class LoadSceneOnClick : MonoBehaviour {
 		if(ArgumentManager.instance.arguments.ContainsKey (ArgumentManager.GAME_MODE)) {
 			ArgumentManager.instance.arguments.Remove (ArgumentManager.GAME_MODE);
 		}
+		ArgumentManager.instance.arguments.Add (ArgumentManager.IS_MULTI_PLAYER,isMultiplayer);
 		ArgumentManager.instance.arguments.Add (ArgumentManager.GAME_MODE, gameMode);
 	}
 
