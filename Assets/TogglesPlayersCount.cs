@@ -33,8 +33,7 @@ public class TogglesPlayersCount : MonoBehaviour {
 		} else {
 			Debug.Log ("siktir elar...");
 		}
-
-		Debug.Log ("=====activeTogglesCount "+activeTogglesCount);
+			
 
 	}
 
