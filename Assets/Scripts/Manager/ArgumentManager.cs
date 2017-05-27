@@ -5,6 +5,7 @@ using UnityEngine;
 public class ArgumentManager : MonoBehaviour {
 
 	public static string GAME_MODE = "game_mode";
+	public static string IS_MULTI_PLAYER = "is_multi_player";
 
 	public static ArgumentManager instance;
 
