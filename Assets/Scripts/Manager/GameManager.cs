@@ -57,7 +57,42 @@ public class GameManager : Photon.MonoBehaviour {
 		EventManager.StartListening (EventManager.CHERRIES_CREATED, CherriesCreated);
 	}
 
-	public void InitPlayers(GameMode mode) {
+	public void InitSinglePlayer(GameMode mode) {
+		GameObject playerObj = PhotonNetwork.Instantiate ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0);
+		playerObj.name = PhotonNetwork.playerName;
+		PlayerBehaviour player = playerObj.GetComponent<Player> ();
+		player.playerName = PhotonNetwork.playerName;
+		player.photonView.RPC ("SetEmpty", PhotonTargets.AllBuffered, false);
+		players.Add (player);
+		int index = UnityEngine.Random.Range (0, seasonIndices.Count);
+		photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {0, seasonIndices[index]});
+		seasonIndices.Remove (index);
+		int size = 0;
+		switch (mode) {
+		case GameMode.SINGLE_TWO_PLAYER:
+			size = 2;
+			break;
+		case GameMode.SINGLE_THREE_PLAYER:
+			size = 3;
+			break;
+		case GameMode.SINGLE_FOUR_PLAYER:
+			size = 4;
+			break;
+		}
+		for (int i = 1; i < size; i++) {
+			playerObj = PhotonNetwork.Instantiate ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0);
+			player = playerObj.GetComponent<Player> ();
+			player.playerName = "EmptyPlayer" + i;
+			player.name = "EmptyPlayer";
+			players.Add (player);
+			index = UnityEngine.Random.Range (0, seasonIndices.Count);
+			photonView.RPC ("SetPlayerSeason", PhotonTargets.All, new object[] {i, seasonIndices[index]});
+			seasonIndices.Remove (index);
+		}
+		Debug.Log ("single players loaded");
+	}
+
+	public void InitMultiPlayers(GameMode mode) {
 		if (PhotonNetwork.isMasterClient) {
 			GameObject playerObj = PhotonNetwork.Instantiate ("Prefabs/Player", Vector3.zero, Quaternion.identity, 0);
 			playerObj.name = PhotonNetwork.playerName;
@@ -115,8 +150,12 @@ public class GameManager : Photon.MonoBehaviour {
 	}
 
 	public void CreateGame() {
-		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.MULTI_FOUR_PLAYER;
-		InitPlayers (mode);
+		GameMode mode = ArgumentManager.instance != null ? (GameMode)ArgumentManager.instance.arguments [ArgumentManager.GAME_MODE] : GameMode.SINGLE_FOUR_PLAYER;
+		if ((int)mode < 5) {
+			InitMultiPlayers (mode);
+		} else {
+			InitSinglePlayer (mode);
+		}
 		if (PhotonNetwork.isMasterClient) {
 			CreateGameBoard ();
 		}
