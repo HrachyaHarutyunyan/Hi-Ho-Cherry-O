@@ -7,10 +7,12 @@ public class GameManager : Photon.MonoBehaviour {
 
 	public enum GameMode
 	{
-		TWO_PLAYER = 2,
-		THREE_PLAYER,
-		FOUR_PLAYER,
-		MULTIPLAYER
+		SINGLE_TWO_PLAYER = 2,
+		SINGLE_THREE_PLAYER,
+		SINGLE_FOUR_PLAYER,
+		MULTI_TWO_PLAYER,
+		MULTI_THREE_PLAYER,
+		MULTI_FOUR_PLAYER,
 	}
 
 	List<int> seasonIndices = new List<int> ();
